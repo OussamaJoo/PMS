@@ -1,7 +1,7 @@
 
 /* Requires the Docker Pipeline plugin */
 pipeline {
-    node('docker-agent')
+    agent none
    
     stages {
         stage('prepareDependencies') {
