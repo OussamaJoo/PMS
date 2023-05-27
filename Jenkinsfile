@@ -1,8 +1,8 @@
 
 /* Requires the Docker Pipeline plugin */
 pipeline {
-    agent any
-    label 'docker-agent'
+    agent {label 'docker-agent'}
+   
     stages {
         stage('prepareDependencies') {
             steps {
