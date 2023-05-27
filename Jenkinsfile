@@ -7,6 +7,7 @@ pipeline {
             steps {
                 echo "PrepareDependencies"
               /*  sh 'npm install --legacy-peer-deps' */
+                sh 'docker version'
           
             }
             }
