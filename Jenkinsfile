@@ -5,6 +5,11 @@ pipeline {
    
     stages {
         stage('prepareDependencies') {
+            agent {
+      	docker {
+        	image 'maven:3.5.0'
+        }
+      }
             steps {
                 echo "PrepareDependencies"
               /*  sh 'npm install --legacy-peer-deps' */
