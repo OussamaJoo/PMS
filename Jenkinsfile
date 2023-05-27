@@ -1,7 +1,7 @@
 
 /* Requires the Docker Pipeline plugin */
 pipeline {
-    agent {label 'slave01'}
+    agent any
     stages {
         stage('prepareDependencies') {
             steps {
