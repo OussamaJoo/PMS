@@ -26,7 +26,7 @@ pipeline {
            stage('push_images') {
             steps {
                /* sh 'docker ps' */
-               
+               echo ""
             }
             } 
             
@@ -34,6 +34,7 @@ pipeline {
             steps {
                /* sh 'docker-compose down' */
               /*  sh 'docker-compose up -d' */
+                echo ""
             }
             }
             stage('E2E_test') {
