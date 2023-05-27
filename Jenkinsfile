@@ -20,7 +20,7 @@ pipeline {
            stage('build_images') {
             steps {
                /* sh 'docker-compose -f docker-compose.yml build' */
-               
+               echo ""
             }
             }
            stage('push_images') {
