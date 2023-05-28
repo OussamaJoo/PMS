@@ -17,21 +17,8 @@ pipeline {
               sh 'docker-compose build --parallel frontend'
             }
             }
-           stage('build_images') {
-            steps {
-              /*  sh 'docker-compose -f docker-compose.yml build' */
-                echo ""
-               
-            }
-            }
-           stage('push_images') {
-            steps {
-               /* sh 'docker ps' */
-                echo ""
-                
-               
-            }
-            } 
+           
+            
             
             stage('deploy') {
             steps {
@@ -46,6 +33,16 @@ pipeline {
                 
             }
         }
+
+
+        stage('push_images') {
+            steps {
+               /* sh 'docker ps' */
+                echo ""
+                
+               
+            }
+            }
     }
     
     
