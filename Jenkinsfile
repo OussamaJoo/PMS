@@ -28,6 +28,7 @@ pipeline {
             steps {
                /* sh 'docker ps' */
                 echo ""
+                sh 'docker version'
                
             }
             } 
