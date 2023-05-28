@@ -2,19 +2,18 @@
 pipeline {
     agent {label 'docker-agent'}
     stages {
-        stage('prepareDependencies') {
+        stage('build_back') {
             steps {
-                echo "PrepareDependencies"
-              /*  sh 'npm install --legacy-peer-deps' */
+                echo "building backend"
+              sh 'docker-compose build --parallel backend'
           
             }
             }
             
-          stage('test') {
+          stage('build_front') {
             steps {
-              echo "Testing"
-              /* sh 'npm run test' */
-                echo ""
+              echo "building frontend"
+              sh 'docker-compose build --parallel frontend'
             }
             }
            stage('build_images') {
@@ -28,15 +27,15 @@ pipeline {
             steps {
                /* sh 'docker ps' */
                 echo ""
-                sh 'docker version'
+                
                
             }
             } 
             
             stage('deploy') {
             steps {
-              /*  sh 'docker-compose down' */
-              /*  sh 'docker-compose up -d' */
+                sh 'docker-compose down' 
+                sh 'docker-compose up -d' 
                 echo ""
             }
             }

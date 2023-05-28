@@ -1,0 +1,18 @@
+version: '3'
+services:
+  frontend:
+    build:
+      context: ./front
+    image: pms-front
+    ports:
+      - 3000:3000
+    
+
+  backend:
+    build:
+      context: ./back
+    image: pms-back
+    ports:
+      - 8000:8000
+    
+
