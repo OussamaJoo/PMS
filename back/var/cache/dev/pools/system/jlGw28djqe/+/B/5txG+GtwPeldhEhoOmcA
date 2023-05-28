@@ -1,0 +1,1220 @@
+<?php //resource_metadata_collection_364be0e81671bad72b934f4b91b960cb
+
+return [PHP_INT_MAX, static function () { return \Symfony\Component\VarExporter\Internal\Hydrator::hydrate(
+    $o = [
+        clone (($p = &\Symfony\Component\VarExporter\Internal\Registry::$prototypes)['ApiPlatform\\Metadata\\ApiResource'] ?? \Symfony\Component\VarExporter\Internal\Registry::p('ApiPlatform\\Metadata\\ApiResource')),
+        clone ($p['ApiPlatform\\Metadata\\Operations'] ?? \Symfony\Component\VarExporter\Internal\Registry::p('ApiPlatform\\Metadata\\Operations')),
+        clone ($p['ApiPlatform\\Metadata\\GetCollection'] ?? \Symfony\Component\VarExporter\Internal\Registry::p('ApiPlatform\\Metadata\\GetCollection')),
+        clone ($p['ApiPlatform\\Metadata\\Post'] ?? \Symfony\Component\VarExporter\Internal\Registry::p('ApiPlatform\\Metadata\\Post')),
+        clone ($p['ApiPlatform\\Metadata\\Get'] ?? \Symfony\Component\VarExporter\Internal\Registry::p('ApiPlatform\\Metadata\\Get')),
+        clone ($p['ApiPlatform\\Metadata\\Link'] ?? \Symfony\Component\VarExporter\Internal\Registry::p('ApiPlatform\\Metadata\\Link')),
+        clone ($p['ApiPlatform\\Metadata\\Put'] ?? \Symfony\Component\VarExporter\Internal\Registry::p('ApiPlatform\\Metadata\\Put')),
+        clone $p['ApiPlatform\\Metadata\\Link'],
+        clone ($p['ApiPlatform\\Metadata\\Patch'] ?? \Symfony\Component\VarExporter\Internal\Registry::p('ApiPlatform\\Metadata\\Patch')),
+        clone $p['ApiPlatform\\Metadata\\Link'],
+        clone ($p['ApiPlatform\\Metadata\\Delete'] ?? \Symfony\Component\VarExporter\Internal\Registry::p('ApiPlatform\\Metadata\\Delete')),
+        clone $p['ApiPlatform\\Metadata\\Link'],
+        clone $p['ApiPlatform\\Metadata\\Link'],
+        clone $p['ApiPlatform\\Metadata\\ApiResource'],
+        clone $p['ApiPlatform\\Metadata\\Operations'],
+        clone $p['ApiPlatform\\Metadata\\Put'],
+        clone $p['ApiPlatform\\Metadata\\Link'],
+        clone $p['ApiPlatform\\Metadata\\Link'],
+    ],
+    null,
+    [
+        'ApiPlatform\\Metadata\\ApiResource' => [
+            'operations' => [
+                $o[1],
+                13 => $o[14],
+            ],
+            'uriTemplate' => [
+                null,
+                13 => null,
+            ],
+            'shortName' => [
+                'TypeEtablissement',
+                13 => 'TypeEtablissement',
+            ],
+            'description' => [
+                null,
+                13 => null,
+            ],
+            'types' => [
+                null,
+                13 => null,
+            ],
+            'uriVariables' => [
+                [
+                    'id' => $o[12],
+                ],
+                13 => [
+                    'id' => $o[17],
+                ],
+            ],
+            'routePrefix' => [
+                null,
+                13 => null,
+            ],
+            'defaults' => [
+                null,
+                13 => null,
+            ],
+            'requirements' => [
+                null,
+                13 => null,
+            ],
+            'options' => [
+                null,
+                13 => null,
+            ],
+            'stateless' => [
+                null,
+                13 => null,
+            ],
+            'sunset' => [
+                null,
+                13 => null,
+            ],
+            'acceptPatch' => [
+                null,
+                13 => null,
+            ],
+            'status' => [
+                null,
+                13 => null,
+            ],
+            'host' => [
+                null,
+                13 => null,
+            ],
+            'schemes' => [
+                null,
+                13 => null,
+            ],
+            'condition' => [
+                null,
+                13 => null,
+            ],
+            'controller' => [
+                null,
+                13 => null,
+            ],
+            'class' => [
+                'App\\Entity\\TypeEtablissement',
+                13 => 'App\\Entity\\TypeEtablissement',
+            ],
+            'urlGenerationStrategy' => [
+                null,
+                13 => null,
+            ],
+            'deprecationReason' => [
+                null,
+                13 => null,
+            ],
+            'cacheHeaders' => [
+                null,
+                13 => null,
+            ],
+            'normalizationContext' => [
+                [
+                    'groups' => [
+                        'TypeEtablissement:read',
+                    ],
+                ],
+                13 => null,
+            ],
+            'denormalizationContext' => [
+                [
+                    'groups' => [
+                        'TypeEtablissement:create',
+                        'TypeEtablissement:update',
+                    ],
+                ],
+                13 => null,
+            ],
+            'collectDenormalizationErrors' => [
+                null,
+                13 => null,
+            ],
+            'hydraContext' => [
+                null,
+                13 => null,
+            ],
+            'openapiContext' => [
+                null,
+                13 => null,
+            ],
+            'openapi' => [
+                null,
+                13 => null,
+            ],
+            'validationContext' => [
+                null,
+                13 => null,
+            ],
+            'filters' => [
+                null,
+                13 => null,
+            ],
+            'elasticsearch' => [
+                null,
+                13 => null,
+            ],
+            'order' => [
+                null,
+                13 => null,
+            ],
+            'fetchPartial' => [
+                null,
+                13 => null,
+            ],
+            'forceEager' => [
+                null,
+                13 => null,
+            ],
+            'paginationClientEnabled' => [
+                null,
+                13 => null,
+            ],
+            'paginationClientItemsPerPage' => [
+                null,
+                13 => null,
+            ],
+            'paginationClientPartial' => [
+                null,
+                13 => null,
+            ],
+            'paginationViaCursor' => [
+                null,
+                13 => null,
+            ],
+            'paginationEnabled' => [
+                null,
+                13 => null,
+            ],
+            'paginationFetchJoinCollection' => [
+                null,
+                13 => null,
+            ],
+            'paginationUseOutputWalkers' => [
+                null,
+                13 => null,
+            ],
+            'paginationItemsPerPage' => [
+                null,
+                13 => null,
+            ],
+            'paginationMaximumItemsPerPage' => [
+                null,
+                13 => null,
+            ],
+            'paginationPartial' => [
+                null,
+                13 => null,
+            ],
+            'paginationType' => [
+                null,
+                13 => null,
+            ],
+            'security' => [
+                null,
+                13 => null,
+            ],
+            'securityMessage' => [
+                null,
+                13 => null,
+            ],
+            'securityPostDenormalize' => [
+                null,
+                13 => null,
+            ],
+            'securityPostDenormalizeMessage' => [
+                null,
+                13 => null,
+            ],
+            'securityPostValidation' => [
+                null,
+                13 => null,
+            ],
+            'securityPostValidationMessage' => [
+                null,
+                13 => null,
+            ],
+            'compositeIdentifier' => [
+                null,
+                13 => null,
+            ],
+            'exceptionToStatus' => [
+                null,
+                13 => null,
+            ],
+            'queryParameterValidationEnabled' => [
+                null,
+                13 => null,
+            ],
+            'graphQlOperations' => [
+                [],
+                13 => [],
+            ],
+            'stateOptions' => [
+                null,
+                13 => null,
+            ],
+            'extraProperties' => [
+                [],
+                13 => [
+                    'is_alternate_resource_metadata' => true,
+                ],
+            ],
+        ],
+        'ApiPlatform\\Metadata\\Operations' => [
+            'operations' => [
+                1 => [
+                    [
+                        '_api_/type_etablissements{._format}_get_collection',
+                        $o[2],
+                    ],
+                    [
+                        '_api_/createTypeEtab_post',
+                        $o[3],
+                    ],
+                    [
+                        '_api_/type_etablissements/{id}{._format}_get',
+                        $o[4],
+                    ],
+                    [
+                        '_api_/type_etablissements/{id}{._format}_put',
+                        $o[6],
+                    ],
+                    [
+                        '_api_/type_etablissements/{id}{._format}_patch',
+                        $o[8],
+                    ],
+                    [
+                        '_api_/type_etablissements/{id}{._format}_delete',
+                        $o[10],
+                    ],
+                ],
+                14 => [
+                    [
+                        '_api_/type_etablissements/{id}{._format}_put',
+                        $o[15],
+                    ],
+                ],
+            ],
+        ],
+        'ApiPlatform\\Metadata\\Operation' => [
+            'shortName' => [
+                2 => 'TypeEtablissement',
+                'TypeEtablissement',
+                'TypeEtablissement',
+                6 => 'TypeEtablissement',
+                8 => 'TypeEtablissement',
+                10 => 'TypeEtablissement',
+                15 => 'TypeEtablissement',
+            ],
+            'class' => [
+                2 => 'App\\Entity\\TypeEtablissement',
+                'App\\Entity\\TypeEtablissement',
+                'App\\Entity\\TypeEtablissement',
+                6 => 'App\\Entity\\TypeEtablissement',
+                8 => 'App\\Entity\\TypeEtablissement',
+                10 => 'App\\Entity\\TypeEtablissement',
+                15 => 'App\\Entity\\TypeEtablissement',
+            ],
+            'paginationEnabled' => [
+                2 => null,
+                null,
+                null,
+                6 => null,
+                8 => null,
+                10 => null,
+                15 => null,
+            ],
+            'paginationType' => [
+                2 => null,
+                null,
+                null,
+                6 => null,
+                8 => null,
+                10 => null,
+                15 => null,
+            ],
+            'paginationItemsPerPage' => [
+                2 => null,
+                null,
+                null,
+                6 => null,
+                8 => null,
+                10 => null,
+                15 => null,
+            ],
+            'paginationMaximumItemsPerPage' => [
+                2 => null,
+                null,
+                null,
+                6 => null,
+                8 => null,
+                10 => null,
+                15 => null,
+            ],
+            'paginationPartial' => [
+                2 => null,
+                null,
+                null,
+                6 => null,
+                8 => null,
+                10 => null,
+                15 => null,
+            ],
+            'paginationClientEnabled' => [
+                2 => null,
+                null,
+                null,
+                6 => null,
+                8 => null,
+                10 => null,
+                15 => null,
+            ],
+            'paginationClientItemsPerPage' => [
+                2 => null,
+                null,
+                null,
+                6 => null,
+                8 => null,
+                10 => null,
+                15 => null,
+            ],
+            'paginationClientPartial' => [
+                2 => null,
+                null,
+                null,
+                6 => null,
+                8 => null,
+                10 => null,
+                15 => null,
+            ],
+            'paginationFetchJoinCollection' => [
+                2 => null,
+                null,
+                null,
+                6 => null,
+                8 => null,
+                10 => null,
+                15 => null,
+            ],
+            'paginationUseOutputWalkers' => [
+                2 => null,
+                null,
+                null,
+                6 => null,
+                8 => null,
+                10 => null,
+                15 => null,
+            ],
+            'order' => [
+                2 => null,
+                null,
+                null,
+                6 => null,
+                8 => null,
+                10 => null,
+                15 => null,
+            ],
+            'description' => [
+                2 => null,
+                null,
+                null,
+                6 => null,
+                8 => null,
+                10 => null,
+                15 => null,
+            ],
+            'normalizationContext' => [
+                2 => [
+                    'groups' => [
+                        'TypeEtablissement:read',
+                    ],
+                ],
+                [
+                    'groups' => [
+                        'TypeEtablissement:read',
+                    ],
+                ],
+                [
+                    'groups' => [
+                        'TypeEtablissement:read',
+                    ],
+                ],
+                6 => [
+                    'groups' => [
+                        'TypeEtablissement:read',
+                    ],
+                ],
+                8 => [
+                    'groups' => [
+                        'TypeEtablissement:read',
+                    ],
+                ],
+                10 => [
+                    'groups' => [
+                        'TypeEtablissement:read',
+                    ],
+                ],
+                15 => null,
+            ],
+            'denormalizationContext' => [
+                2 => [
+                    'groups' => [
+                        'TypeEtablissement:create',
+                        'TypeEtablissement:update',
+                    ],
+                ],
+                [
+                    'groups' => [
+                        'TypeEtablissement:create',
+                        'TypeEtablissement:update',
+                    ],
+                ],
+                [
+                    'groups' => [
+                        'TypeEtablissement:create',
+                        'TypeEtablissement:update',
+                    ],
+                ],
+                6 => [
+                    'groups' => [
+                        'TypeEtablissement:create',
+                        'TypeEtablissement:update',
+                    ],
+                ],
+                8 => [
+                    'groups' => [
+                        'TypeEtablissement:create',
+                        'TypeEtablissement:update',
+                    ],
+                ],
+                10 => [
+                    'groups' => [
+                        'TypeEtablissement:create',
+                        'TypeEtablissement:update',
+                    ],
+                ],
+                15 => [
+                    'groups' => [
+                        'put',
+                    ],
+                ],
+            ],
+            'collectDenormalizationErrors' => [
+                2 => null,
+                null,
+                null,
+                6 => null,
+                8 => null,
+                10 => null,
+                15 => null,
+            ],
+            'security' => [
+                2 => null,
+                null,
+                null,
+                6 => null,
+                8 => null,
+                10 => null,
+                15 => null,
+            ],
+            'securityMessage' => [
+                2 => null,
+                null,
+                null,
+                6 => null,
+                8 => null,
+                10 => null,
+                15 => null,
+            ],
+            'securityPostDenormalize' => [
+                2 => null,
+                null,
+                null,
+                6 => null,
+                8 => null,
+                10 => null,
+                15 => null,
+            ],
+            'securityPostDenormalizeMessage' => [
+                2 => null,
+                null,
+                null,
+                6 => null,
+                8 => null,
+                10 => null,
+                15 => null,
+            ],
+            'securityPostValidation' => [
+                2 => null,
+                null,
+                null,
+                6 => null,
+                8 => null,
+                10 => null,
+                15 => null,
+            ],
+            'securityPostValidationMessage' => [
+                2 => null,
+                null,
+                null,
+                6 => null,
+                8 => null,
+                10 => null,
+                15 => null,
+            ],
+            'deprecationReason' => [
+                2 => null,
+                null,
+                null,
+                6 => null,
+                8 => null,
+                10 => null,
+                15 => null,
+            ],
+            'filters' => [
+                2 => [],
+                [],
+                [],
+                6 => [],
+                8 => [],
+                10 => [],
+                15 => [],
+            ],
+            'validationContext' => [
+                2 => null,
+                null,
+                null,
+                6 => null,
+                8 => null,
+                10 => null,
+                15 => null,
+            ],
+            'elasticsearch' => [
+                2 => null,
+                null,
+                null,
+                6 => null,
+                8 => null,
+                10 => null,
+                15 => null,
+            ],
+            'urlGenerationStrategy' => [
+                2 => null,
+                null,
+                null,
+                6 => null,
+                8 => null,
+                10 => null,
+                15 => null,
+            ],
+            'read' => [
+                2 => null,
+                null,
+                null,
+                6 => null,
+                8 => null,
+                10 => null,
+                15 => null,
+            ],
+            'deserialize' => [
+                2 => null,
+                null,
+                null,
+                6 => null,
+                8 => null,
+                10 => null,
+                15 => null,
+            ],
+            'validate' => [
+                2 => null,
+                null,
+                null,
+                6 => null,
+                8 => null,
+                10 => null,
+                15 => null,
+            ],
+            'write' => [
+                2 => null,
+                null,
+                null,
+                6 => null,
+                8 => null,
+                10 => null,
+                15 => null,
+            ],
+            'serialize' => [
+                2 => null,
+                null,
+                null,
+                6 => null,
+                8 => null,
+                10 => null,
+                15 => null,
+            ],
+            'fetchPartial' => [
+                2 => null,
+                null,
+                null,
+                6 => null,
+                8 => null,
+                10 => null,
+                15 => null,
+            ],
+            'forceEager' => [
+                2 => null,
+                null,
+                null,
+                6 => null,
+                8 => null,
+                10 => null,
+                15 => null,
+            ],
+            'priority' => [
+                2 => 0,
+                1,
+                2,
+                6 => 3,
+                8 => 4,
+                10 => 5,
+                15 => 1,
+            ],
+            'name' => [
+                2 => '_api_/type_etablissements{._format}_get_collection',
+                '_api_/createTypeEtab_post',
+                '_api_/type_etablissements/{id}{._format}_get',
+                6 => '_api_/type_etablissements/{id}{._format}_put',
+                8 => '_api_/type_etablissements/{id}{._format}_patch',
+                10 => '_api_/type_etablissements/{id}{._format}_delete',
+                15 => '_api_/type_etablissements/{id}{._format}_put',
+            ],
+            'provider' => [
+                2 => 'ApiPlatform\\Doctrine\\Orm\\State\\CollectionProvider',
+                'ApiPlatform\\Doctrine\\Orm\\State\\ItemProvider',
+                'ApiPlatform\\Doctrine\\Orm\\State\\ItemProvider',
+                6 => 'ApiPlatform\\Doctrine\\Orm\\State\\ItemProvider',
+                8 => 'ApiPlatform\\Doctrine\\Orm\\State\\ItemProvider',
+                10 => 'ApiPlatform\\Doctrine\\Orm\\State\\ItemProvider',
+                15 => 'ApiPlatform\\Doctrine\\Orm\\State\\ItemProvider',
+            ],
+            'processor' => [
+                2 => 'api_platform.doctrine.orm.state.persist_processor',
+                'api_platform.doctrine.orm.state.persist_processor',
+                'api_platform.doctrine.orm.state.persist_processor',
+                6 => 'api_platform.doctrine.orm.state.persist_processor',
+                8 => 'api_platform.doctrine.orm.state.persist_processor',
+                10 => 'api_platform.doctrine.orm.state.remove_processor',
+                15 => 'api_platform.doctrine.orm.state.persist_processor',
+            ],
+            'stateOptions' => [
+                2 => null,
+                null,
+                null,
+                6 => null,
+                8 => null,
+                10 => null,
+                15 => null,
+            ],
+            'extraProperties' => [
+                2 => [],
+                [
+                    'user_defined_uri_template' => true,
+                ],
+                [],
+                6 => [],
+                8 => [],
+                10 => [],
+                15 => [
+                    'is_alternate_resource_metadata' => true,
+                ],
+            ],
+        ],
+        'ApiPlatform\\Metadata\\HttpOperation' => [
+            'method' => [
+                2 => 'GET',
+                'POST',
+                'GET',
+                6 => 'PUT',
+                8 => 'PATCH',
+                10 => 'DELETE',
+                15 => 'PUT',
+            ],
+            'uriTemplate' => [
+                2 => '/type_etablissements{._format}',
+                '/createTypeEtab',
+                '/type_etablissements/{id}{._format}',
+                6 => '/type_etablissements/{id}{._format}',
+                8 => '/type_etablissements/{id}{._format}',
+                10 => '/type_etablissements/{id}{._format}',
+                15 => '/type_etablissements/{id}{._format}',
+            ],
+            'types' => [
+                2 => null,
+                null,
+                null,
+                6 => null,
+                8 => null,
+                10 => null,
+                15 => null,
+            ],
+            'inputFormats' => [
+                2 => [
+                    'jsonld' => [
+                        'application/ld+json',
+                    ],
+                    'json' => [
+                        'application/json',
+                    ],
+                    'html' => [
+                        'text/html',
+                    ],
+                ],
+                [
+                    'jsonld' => [
+                        'application/ld+json',
+                    ],
+                    'json' => [
+                        'application/json',
+                    ],
+                    'html' => [
+                        'text/html',
+                    ],
+                ],
+                [
+                    'jsonld' => [
+                        'application/ld+json',
+                    ],
+                    'json' => [
+                        'application/json',
+                    ],
+                    'html' => [
+                        'text/html',
+                    ],
+                ],
+                6 => [
+                    'jsonld' => [
+                        'application/ld+json',
+                    ],
+                    'json' => [
+                        'application/json',
+                    ],
+                    'html' => [
+                        'text/html',
+                    ],
+                ],
+                8 => [
+                    'json' => [
+                        'application/merge-patch+json',
+                    ],
+                ],
+                10 => [
+                    'jsonld' => [
+                        'application/ld+json',
+                    ],
+                    'json' => [
+                        'application/json',
+                    ],
+                    'html' => [
+                        'text/html',
+                    ],
+                ],
+                15 => [
+                    'jsonld' => [
+                        'application/ld+json',
+                    ],
+                    'json' => [
+                        'application/json',
+                    ],
+                    'html' => [
+                        'text/html',
+                    ],
+                ],
+            ],
+            'outputFormats' => [
+                2 => [
+                    'jsonld' => [
+                        'application/ld+json',
+                    ],
+                    'json' => [
+                        'application/json',
+                    ],
+                    'html' => [
+                        'text/html',
+                    ],
+                ],
+                [
+                    'jsonld' => [
+                        'application/ld+json',
+                    ],
+                    'json' => [
+                        'application/json',
+                    ],
+                    'html' => [
+                        'text/html',
+                    ],
+                ],
+                [
+                    'jsonld' => [
+                        'application/ld+json',
+                    ],
+                    'json' => [
+                        'application/json',
+                    ],
+                    'html' => [
+                        'text/html',
+                    ],
+                ],
+                6 => [
+                    'jsonld' => [
+                        'application/ld+json',
+                    ],
+                    'json' => [
+                        'application/json',
+                    ],
+                    'html' => [
+                        'text/html',
+                    ],
+                ],
+                8 => [
+                    'jsonld' => [
+                        'application/ld+json',
+                    ],
+                    'json' => [
+                        'application/json',
+                    ],
+                    'html' => [
+                        'text/html',
+                    ],
+                ],
+                10 => [
+                    'jsonld' => [
+                        'application/ld+json',
+                    ],
+                    'json' => [
+                        'application/json',
+                    ],
+                    'html' => [
+                        'text/html',
+                    ],
+                ],
+                15 => [
+                    'jsonld' => [
+                        'application/ld+json',
+                    ],
+                    'json' => [
+                        'application/json',
+                    ],
+                    'html' => [
+                        'text/html',
+                    ],
+                ],
+            ],
+            'routePrefix' => [
+                2 => null,
+                null,
+                null,
+                6 => null,
+                8 => null,
+                10 => null,
+                15 => null,
+            ],
+            'routeName' => [
+                2 => null,
+                null,
+                null,
+                6 => null,
+                8 => null,
+                10 => null,
+                15 => null,
+            ],
+            'defaults' => [
+                2 => null,
+                null,
+                null,
+                6 => null,
+                8 => null,
+                10 => null,
+                15 => null,
+            ],
+            'requirements' => [
+                2 => null,
+                null,
+                null,
+                6 => null,
+                8 => null,
+                10 => null,
+                15 => null,
+            ],
+            'options' => [
+                2 => null,
+                null,
+                null,
+                6 => null,
+                8 => null,
+                10 => null,
+                15 => null,
+            ],
+            'stateless' => [
+                2 => null,
+                null,
+                null,
+                6 => null,
+                8 => null,
+                10 => null,
+                15 => null,
+            ],
+            'sunset' => [
+                2 => null,
+                null,
+                null,
+                6 => null,
+                8 => null,
+                10 => null,
+                15 => null,
+            ],
+            'acceptPatch' => [
+                2 => null,
+                'application/merge-patch+json',
+                'application/merge-patch+json',
+                6 => 'application/merge-patch+json',
+                8 => 'application/merge-patch+json',
+                10 => 'application/merge-patch+json',
+                15 => null,
+            ],
+            'host' => [
+                2 => null,
+                null,
+                null,
+                6 => null,
+                8 => null,
+                10 => null,
+                15 => null,
+            ],
+            'schemes' => [
+                2 => null,
+                null,
+                null,
+                6 => null,
+                8 => null,
+                10 => null,
+                15 => null,
+            ],
+            'condition' => [
+                2 => null,
+                null,
+                null,
+                6 => null,
+                8 => null,
+                10 => null,
+                15 => null,
+            ],
+            'controller' => [
+                2 => null,
+                null,
+                null,
+                6 => null,
+                8 => null,
+                10 => null,
+                15 => null,
+            ],
+            'cacheHeaders' => [
+                2 => null,
+                null,
+                null,
+                6 => null,
+                8 => null,
+                10 => null,
+                15 => null,
+            ],
+            'paginationViaCursor' => [
+                2 => null,
+                null,
+                null,
+                6 => null,
+                8 => null,
+                10 => null,
+                15 => null,
+            ],
+            'hydraContext' => [
+                2 => null,
+                null,
+                null,
+                6 => null,
+                8 => null,
+                10 => null,
+                15 => null,
+            ],
+            'openapiContext' => [
+                2 => null,
+                null,
+                null,
+                6 => null,
+                8 => null,
+                10 => null,
+                15 => null,
+            ],
+            'openapi' => [
+                2 => null,
+                null,
+                null,
+                6 => null,
+                8 => null,
+                10 => null,
+                15 => null,
+            ],
+            'exceptionToStatus' => [
+                2 => null,
+                null,
+                null,
+                6 => null,
+                8 => null,
+                10 => null,
+                15 => null,
+            ],
+            'queryParameterValidationEnabled' => [
+                2 => null,
+                null,
+                null,
+                6 => null,
+                8 => null,
+                10 => null,
+                15 => null,
+            ],
+            'uriVariables' => [
+                3 => [],
+                [
+                    'id' => $o[5],
+                ],
+                6 => [
+                    'id' => $o[7],
+                ],
+                8 => [
+                    'id' => $o[9],
+                ],
+                10 => [
+                    'id' => $o[11],
+                ],
+                15 => [
+                    'id' => $o[16],
+                ],
+            ],
+        ],
+        'ApiPlatform\\Metadata\\GetCollection' => [
+            'itemUriTemplate' => [
+                2 => null,
+            ],
+        ],
+        'ApiPlatform\\Metadata\\Post' => [
+            'itemUriTemplate' => [
+                3 => null,
+            ],
+        ],
+        'ApiPlatform\\Metadata\\Link' => [
+            'parameterName' => [
+                5 => 'id',
+                7 => 'id',
+                9 => 'id',
+                11 => 'id',
+                'id',
+                16 => 'id',
+                'id',
+            ],
+            'fromProperty' => [
+                5 => null,
+                7 => null,
+                9 => null,
+                11 => null,
+                null,
+                16 => null,
+                null,
+            ],
+            'toProperty' => [
+                5 => null,
+                7 => null,
+                9 => null,
+                11 => null,
+                null,
+                16 => null,
+                null,
+            ],
+            'fromClass' => [
+                5 => 'App\\Entity\\TypeEtablissement',
+                7 => 'App\\Entity\\TypeEtablissement',
+                9 => 'App\\Entity\\TypeEtablissement',
+                11 => 'App\\Entity\\TypeEtablissement',
+                'App\\Entity\\TypeEtablissement',
+                16 => 'App\\Entity\\TypeEtablissement',
+                'App\\Entity\\TypeEtablissement',
+            ],
+            'toClass' => [
+                5 => null,
+                7 => null,
+                9 => null,
+                11 => null,
+                null,
+                16 => null,
+                null,
+            ],
+            'identifiers' => [
+                5 => [
+                    'id',
+                ],
+                7 => [
+                    'id',
+                ],
+                9 => [
+                    'id',
+                ],
+                11 => [
+                    'id',
+                ],
+                [
+                    'id',
+                ],
+                16 => [
+                    'id',
+                ],
+                [
+                    'id',
+                ],
+            ],
+            'compositeIdentifier' => [
+                5 => null,
+                7 => null,
+                9 => null,
+                11 => null,
+                null,
+                16 => null,
+                null,
+            ],
+            'expandedValue' => [
+                5 => null,
+                7 => null,
+                9 => null,
+                11 => null,
+                null,
+                16 => null,
+                null,
+            ],
+        ],
+        'ApiPlatform\\Metadata\\Put' => [
+            'allowCreate' => [
+                6 => null,
+                15 => null,
+            ],
+        ],
+    ],
+    [
+        $o[0],
+        $o[13],
+    ],
+    []
+); }];

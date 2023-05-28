@@ -1,0 +1,3 @@
+<?php //App%255CController%255CTypologieController%2523getAllTypologies
+
+return [PHP_INT_MAX, []];
