@@ -25,7 +25,9 @@ RUN a2enmod rewrite
 COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
 
 # Copy the application files to the container
-COPY . .
+#COPY . .
+#COPY public/* public/
+ADD . .
 
 # Install Symfony dependencies
 RUN usermod -u 1000 www-data 
