@@ -31,7 +31,8 @@ COPY . .
 RUN usermod -u 1000 www-data 
 
 # Set the correct permissions for Symfony
-#RUN chown -R www-data:www-data var
+RUN mkdir var
+RUN chown -R www-data:www-data var
 
 RUN composer install --no-interaction --no-scripts --no-suggest --prefer-dist --ignore-platform-reqs
 
