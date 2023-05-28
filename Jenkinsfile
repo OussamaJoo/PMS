@@ -6,7 +6,7 @@ pipeline {
             steps {
                 echo "building backend"
                 
-              sh 'docker-compose build --parallel backend'
+              sh 'docker-compose build --no-cache --parallel backend'
           
             }
             }
