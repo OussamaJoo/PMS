@@ -5,6 +5,7 @@ pipeline {
         stage('build_back') {
             steps {
                 echo "building backend"
+                sh 'docker ps'
               sh 'docker-compose build --parallel backend'
           
             }
