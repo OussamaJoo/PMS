@@ -1,5 +1,4 @@
 fos_rest:
     format_listener:
         rules:
-            - { path: ^/api/, priorities: [ html, json, xml ,jsonld , html], fallback_format: ~, prefer_extension: true }
-            - { path: '^/', priorities: [ 'html', '*/*'], fallback_format: html, prefer_extension: true }
+            - { path: ^/api, prefer_extension: true, fallback_format: json, priorities: [ json ] }
