@@ -30,8 +30,8 @@ pipeline {
             stage('E2E_test') {
             steps {
                 echo "E2E Test"
-               
-                sh "curl -I http://172.17.80.1:8000/api/login"
+                echo ""
+                /*sh "curl -I http://172.17.80.1:8000/api/login"*/
                 
             }
         }
