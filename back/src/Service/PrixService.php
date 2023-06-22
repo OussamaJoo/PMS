@@ -145,36 +145,39 @@ class PrixService
         return $data;
     }
 
-    public function SumPrix(Request $request): int
+    public function getAllTarifsByIdEtab(int $id)
     {
-         $somme = 0 ;
-        $datas = json_decode($request->getContent(), true);
-        
-        $dateDe = new \DateTime($datas['dateDe']);
-        $dateAu = new \DateTime($datas['dateAu']);
 
-        while ($dateDe -> format('Y-m-d') <= $dateAu -> format('Y-m-d')) {
-          $p = new Prix();
-          $p = $this->prixRepo->findOneByDatePrix($dateDe,$datas['idTypo']);
-          $somme += $p->getMontant();
+        $prix[] = new Prix();
+        $prix = $this->prixRepo -> findByIdEatb($id);
+        $data = [];
 
-            $dateDe -> modify('+1 day');
+        foreach ($prix as $p) {
+            $typo = new Typologie();
+            $typo = $p->getTypologie();
+            $data1 =  [
+                'id' => $typo->getId(),
+                'nom' => $typo->getNom(),
+                'capacité' => $typo->getCapacite(),
+                'etablissement' => $typo->getEtablissement(),
+                'acceptBebe' => $typo->isAccecptBebe(),
+                'acceptEnfant' => $typo->isAcceptEnfant(),
+                'acceptHandicapé' => $typo->isAcceptHandicapé(),
+                'annulable' => $typo->isAnnulable(),
+                'remboursable' => $typo->isRemborsable(),
+            ];
+
+            $data[] = [
+                'id' => $p->getId(),
+                'date' => $p->getDatePrix(),
+                'montant' => $p->getMontant(),
+                'typologie' => $data1,
+
+            ];
         }
-        return $somme;
+        return $data;
+
     }
 
-    public function SumPrix1(\DateTime $dateDe , \DateTime $dateAu , int $idTypo): int
-    {
-         $somme = 0 ;
-        
-
-        while ($dateDe -> format('Y-m-d') <= $dateAu -> format('Y-m-d')) {
-          $p = new Prix();
-          $p = $this->prixRepo->findOneByDatePrix($dateDe,$idTypo);
-          $somme += $p->getMontant();
-
-            $dateDe -> modify('+1 day');
-        }
-        return $somme;
-    }
+   
 }

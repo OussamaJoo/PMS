@@ -3,12 +3,13 @@ import {
     TYPOLOGIE_ERROR, GET_TYPOLOGIE, GET_TYPOLOGIE_BY_ID,
     GET_TYPOLOGIE_BY_ID_ERROR, SAVE_TYPOLOGIE, SAVE_TYPOLOGIE_ERROR,
     CONFIRMATION_TYPOLOGIE_BY_ID, CONFIRMATION_TYPOLOGIE_BY_ID_ERROR, REMOVE_SELECTED_TYPOLOGIE,
-    CREATE_FACTURE, CREATE_FACTURE_ERROR, UPDATE_TYPOLOGIE, UPDATE_TYPOLOGIE_ERROR, UPLOAD_PDF_FACTURE
-} from "../type/typologie";
+    CREATE_FACTURE, CREATE_FACTURE_ERROR, UPDATE_TYPOLOGIE, UPDATE_TYPOLOGIE_ERROR, UPLOAD_PDF_FACTURE,
+    GET_TYPOLOGIE_BY_ID_ETAB,TYPOLOGIE_BY_ID_ETAB_ERROR} from "../type/typologie";
 import { ISLOADING, LOADING } from "../type/loading"
 
 const initialeState = {
     listTypologies: [],
+    listTypologiesByIDEtab: [],
     typologie: {},
     loading: true
 }
@@ -22,6 +23,19 @@ const typologieReducer = (state = initialeState, action) => {
 
             }
         case TYPOLOGIE_ERROR:
+            return {
+                ...state,
+                error: action.payload,
+
+            }
+
+        case GET_TYPOLOGIE_BY_ID_ETAB:
+            return {
+                ...state,
+                listTypologiesByIDEtab: action.payload,
+
+            }
+        case TYPOLOGIE_BY_ID_ETAB_ERROR:
             return {
                 ...state,
                 error: action.payload,
@@ -91,13 +105,14 @@ const typologieReducer = (state = initialeState, action) => {
         case LOGOUT:
             return {
                 listTypologies: [],
+                listTypologiesByIDEtab: [],
                 typologie: {},
                 loading: true
             }
-            case UPLOAD_PDF_FACTURE:
+        case UPLOAD_PDF_FACTURE:
             return {
                 ...state
-                
+
             };
         default:
             return state;

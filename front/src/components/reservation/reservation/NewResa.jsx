@@ -21,7 +21,8 @@ import moment from 'moment';
 import { loadingComponent } from '../../../redux/actions/loadingAction';
 import { isDisabled } from '@testing-library/user-event/dist/utils';
 import { getMealPlanByIdEtab } from '../../../redux/actions/mealPlanAction';
-
+import OccupantForm from './OccupantForm';
+import { saveCommande } from '../../../redux/actions/commandeAction';
 
 
 
@@ -33,10 +34,12 @@ const NewResa = () => {
     const navigate = useNavigate()
     const { idEtab } = useParams()
 
+    const [listOccupantForm , setListOccupantForm] = useState([])
+
 
     //
     const authReducer = useSelector((state) => state.authReducer)
-    const { user } = authReducer
+    const { user1 } = authReducer
 
 
 
@@ -67,47 +70,51 @@ const NewResa = () => {
 
     // save demander d'achat 
     const [commande, setcommande] = useState({
+        reservation: [
 
-
-        lignesCommande: [
-            
         ],
-
-
-
-
-
+        clientId : user1?.idClient,
+        etablissementId: listSearch[0].hotel.id
+    
     })
+
+    useEffect(()=>{
+        
+
+        const newOrderMenuItem = commande.reservation?.map((element, i) => {
+            
+            if (categorieId && categorieId !== element.typologie) return element;
+            
+            return { ...element, qte: element.qte, typologie: element.typologie, dateDebut: search.dateDu, dateFin: search.dateAu ,occupants : listOccupantForm};
+
+        });
+
+        setcommande({ ...commande, reservation: newOrderMenuItem });
+        console.log(commande)
+
+
+    },[setListOccupantForm,listOccupantForm])
 
     const savecommande = (e) => {
         e.preventDefault()
 
-        dispatch(saveReservation(commande, navigate))
-
-
+        dispatch(saveCommande(commande, navigate))
 
     }
 
-    const [showList, setShowList] = useState(false);
 
     const searchDispo = (e) => {
 
         e.preventDefault()
-        setcommande({ ...commande, lignesCommande: [] })
+        setcommande({ ...commande, reservation: [] })
         setsearch(
             {
                 ...search,
                 ok: true,
             })
 
-
-
-
-
-
-
-        if (search.dateDe != "Invalid date" && search.dateAu != "Invalid date" && search.nbAdultes != 0 && search.nbChambres != 0) {
-            if (search?.dateDe >= search?.dateAu) {
+        if (search.dateDu != "Invalid date" && search.dateAu != "Invalid date" && search.nbAdultes != 0 && search.nbChambres != 0) {
+            if (search?.dateDu >= search?.dateAu) {
                 toast.error("if faut que date Du > date Au", { position: toast.POSITION.BOTTOM_LEFT })
                 setsearch(
                     {
@@ -123,6 +130,10 @@ const NewResa = () => {
                         ok: false,
                     })
             } else {
+                settotale(0)
+                setroomTypes([])
+                setSelected()
+                setnb(0)
                 dispatch(getSearch(search))
             }
         } else {
@@ -134,12 +145,7 @@ const NewResa = () => {
                 })
         }
 
-
-
-
-
     }
-
 
     const numbers = (n) => {
         const t = []
@@ -153,7 +159,7 @@ const NewResa = () => {
     const search1 = JSON.parse(localStorage.getItem('search'))
 
     const [search, setsearch] = useState({
-        dateDe: search1?.dateDe,
+        dateDu: search1?.dateDu,
         dateAu: search1?.dateAu,
         nbChambres: search1?.nbChambres,
         nbAdultes: search1?.nbAdultes,
@@ -171,7 +177,7 @@ const NewResa = () => {
     const [numberOfDays, setNumberOfDays] = useState(0);
 
     const NbrJours = () => {
-        const start = moment(search?.dateDe);
+        const start = moment(search?.dateDu);
         const end = moment(search?.dateAu);
         const days = end.diff(start, 'days');
 
@@ -199,27 +205,40 @@ const NewResa = () => {
         )
     }
 
+    const [categorieId,setcategorieId] = useState(null)
+
     const [selected, setSelected] = useState();
 
-    const handleChange = (idMeal) => {
+    const handleChange = (idMeal, catid) => {
 
-        setSelected(idMeal)
 
-         const newOrderMenuItem = commande.lignesCommande?.map((element, i) => {
-            
-            return { ...element, qte: element.qte, typologie: element.typologie, dateDebut: search.dateDe, dateFin: search.dateAu , mealPlan : idMeal};
-        });
-   
-        
+        let prixMeal1 = 0
        
-        setcommande({ ...commande, lignesCommande: newOrderMenuItem });
+        const newOrderMenuItem = commande.reservation?.map((element, i) => {
+            if (catid !== element.typologie) return element;
+            prixMeal1 = listMealPlanBYIDETAB?.filter(f => f.id == element?.mealPlan)?.map((elm, i) => {
+                if (element.mealPlan == elm.id) return elm.prix;
+
+            });
+
+            return { ...element, qte: element.qte, typologie: element.typologie, dateDebut: search.dateDu, dateFin: search.dateAu, mealPlan: idMeal };
+        });
+
+        const prixMeal = listMealPlanBYIDETAB?.filter(f => f.id == idMeal)?.map((element, i) => {
+            if (idMeal == element.id) return element.prix;
+
+        });
+
+        setcommande({ ...commande, reservation: newOrderMenuItem });
+        let moins = prixMeal1[0] ? prixMeal1[0] : 0
+        settotale((totale - (moins * numberOfDays)) + (prixMeal[0] * numberOfDays))
 
     };
 
 
     const verif = (categoryId) => {
         let ok = false
-        commande?.lignesCommande?.map((element, index) => {
+        commande?.reservation?.map((element, index) => {
             console.log(element)
             if (element.typologie === categoryId) {
                 ok = true
@@ -229,45 +248,55 @@ const NewResa = () => {
         return ok
     }
 
-    const changeQTE = (qte, catid,tarifs) => {
-        const newOrderMenuItem = commande.lignesCommande?.map((element, i) => {
+    const changeQTE = (qte, catid, tarifs) => {
+        const newOrderMenuItem = commande.reservation?.map((element, i) => {
             if (catid !== element.typologie) return element;
-            if(qte<element.qte){
-                settotale(totale-tarifs*(element.qte-qte))
-            }else{
-                settotale(totale+tarifs*(qte-element.qte))
+            if (qte < element.qte) {
+                settotale(totale - tarifs * (element.qte - qte))
+            } else {
+                settotale(totale + tarifs * (qte - element.qte))
             }
-            return { ...element, qte: qte, typologie: catid, dateDebut: search.dateDe, dateFin: search.dateAu };
-           
+            return { ...element, qte: qte, typologie: catid, dateDebut: search.dateDu, dateFin: search.dateAu };
+
         });
 
-        setcommande({ ...commande, lignesCommande: newOrderMenuItem });
+        setcommande({ ...commande, reservation: newOrderMenuItem });
 
     }
 
 
 
-    const [totale , settotale] = useState(0)
+    const [totale, settotale] = useState(0)
+    const [roomTypes, setroomTypes] = useState([])
 
-    const handleQuantityChange = (categoryId, quantity , tarifs) => {
-       
 
-        if (commande?.lignesCommande?.length === 0) {
+    const handleQuantityChange = (categoryId, quantity, tarifs, capacite, nom) => {
+
+
+        if (commande?.reservation?.length === 0) {
             settotale(0)
             setcommande({
-                ...commande, lignesCommande: commande.lignesCommande.concat([
+                ...commande, reservation: commande.reservation.concat([
                     {
-                        dateDebut: search?.dateDe,
+                        dateDebut: search?.dateDu,
                         dateFin: search?.dateAu,
                         qte: quantity,
                         typologie: categoryId,
-                        etablissement : idEtab
+                        etablissement: idEtab
 
 
                     }])
 
             })
-            settotale(tarifs*quantity)
+
+            setroomTypes(roomTypes.concat([{
+                type: nom,
+                capacite: capacite,
+                qte: quantity,
+                id: categoryId
+            },]))
+
+            settotale(tarifs * quantity)
 
         } else {
 
@@ -276,32 +305,42 @@ const NewResa = () => {
             if (verif(categoryId) === true) {
                 if (quantity === 0) {
                     setcommande({
-                        ...commande, lignesCommande: commande.lignesCommande.filter((s, sidx) => s.typologie !== categoryId )
+                        ...commande, reservation: commande.reservation.filter((s, sidx) => s.typologie !== categoryId)
                     })
-                if(commande?.lignesCommande?.length === 0){
-                    settotale(0)
-                }
-                  
-                    
+                    if (commande?.reservation?.length === 0) {
+                        settotale(0)
+                    }
+
+
                 } else {
-                    changeQTE(quantity, categoryId,tarifs)
+
+                    changeQTE(quantity, categoryId, tarifs)
+
                 }
 
             } else {
                 setcommande({
-                    ...commande, lignesCommande: commande.lignesCommande.concat([
+                    ...commande, reservation: commande.reservation.concat([
                         {
-                            dateDebut: search?.dateDe,
+                            dateDebut: search?.dateDu,
                             dateFin: search?.dateAu,
                             qte: quantity,
                             typologie: categoryId,
                             mealPlan: selected,
-                            etablissement : idEtab
+                            etablissement: idEtab
 
 
                         }])
                 })
-                settotale(totale+(tarifs*quantity))
+                setroomTypes(roomTypes.concat([{
+                    type: nom,
+                    capacite: capacite,
+                    qte: quantity,
+                    id: categoryId
+                },]))
+
+
+                settotale(totale + (tarifs * quantity))
             }
 
         }
@@ -310,16 +349,46 @@ const NewResa = () => {
 
     };
 
-    const [nb , setnb] = useState()
-    const [MealPrix , setMealPrix] = useState(0)
+    const [nb, setnb] = useState()
+    const [MealPrix, setMealPrix] = useState(0)
+    const [mp, setmp] = useState()
 
     const getPrixMealPlan = (mealId) => {
-       setMealPrix(0)
-       const m =  listMealPlanBYIDETAB.filter(f=> f.id == mealId).map(f=> {return f.prix})
-       
-       return (m[0]*numberOfDays)
-        
+        setMealPrix(0)
+        const m = listMealPlanBYIDETAB.filter(f => f.id == mealId).map(f => { return f.prix })
+
+        return (m[0] * numberOfDays)
+
     }
+
+
+    const renderOccupants = () => {
+        return (<div>
+            
+            {roomTypes.map((roomType, index) => (
+                <OccupantForm
+                    key={index}
+                    roomType={roomType.type}
+                    capacity={roomType.capacite}
+                    qte={roomType.qte}
+                    commande={commande}
+                    id={roomType.id}
+                    setlistOccupants = {setListOccupantForm}
+                />
+            ))}
+        </div>)
+    }
+
+    const [affiche, setaffiche] = useState('')
+
+    const AfficheOccupants = () => {
+
+        setaffiche('ok')
+        settaga(JSON.stringify(commande) + JSON.stringify(roomTypes))
+    }
+
+    const [taga, settaga] = useState()
+
 
 
 
@@ -376,7 +445,7 @@ const NewResa = () => {
 
                                 <div className='col-2'>
                                     <small><b>Date debut</b></small>
-                                    <DateTimePickerComponent format="yyyy-MM-dd" value={search?.dateDe} onChange={e => setsearch({ ...search, dateDe: moment(e.target.value).format('YYYY-MM-DD') })} placeholder='Choose a date and time' ></DateTimePickerComponent>
+                                    <DateTimePickerComponent format="yyyy-MM-dd" value={search?.dateDu} onChange={e => setsearch({ ...search, dateDu: moment(e.target.value).format('YYYY-MM-DD') })} placeholder='Choose a date and time' ></DateTimePickerComponent>
                                 </div>
                                 <div className='col-2'>
                                     <small><b>Date Fin</b></small>
@@ -415,6 +484,7 @@ const NewResa = () => {
                                     </tr>
 
                                 </thead>
+
                                 {listSearch?.map(menu =>
                                     <tbody>
 
@@ -439,7 +509,7 @@ const NewResa = () => {
                                                     <select className="form-control  form-control-border form-control-sm"
                                                         value={nb}
 
-                                                        onChange={(e) => handleQuantityChange(menuItem?.room?.id, parseInt(e.target.value),menuItem?.prixTotale)}
+                                                        onChange={(e) => handleQuantityChange(menuItem?.room?.id, parseInt(e.target.value), menuItem?.prixTotale, menuItem?.room?.capacite, menuItem?.room?.nom)}
                                                     >
                                                         {Array.from({ length: menuItem?.qte_dispo + 1 }, (_, index) => index).map((number, i) => (
                                                             <option key={number} value={number}>{number}</option>
@@ -451,12 +521,12 @@ const NewResa = () => {
 
                                                 <td>
                                                     <select className="form-control  form-control-border form-control-sm"
-                                                        value={selected}
-                                                        onChange={(e) => { handleChange(e.target.value , menuItem?.room?.id) }}>
+                                                        value={mp}
+                                                        onChange={(e) => { handleChange(parseInt(e.target.value), menuItem?.room?.id) }}>
                                                         <option selected>-----</option>
                                                         {
                                                             listMealPlanBYIDETAB.map(f =>
-                                                                <option key={f.id} value={f.id} >{f.nom+" : "+f.prix+" DT"}</option>
+                                                                <option key={f.id} value={f.id} >{f.nom + " : " + f.prix + " DT"}</option>
                                                             )}
                                                     </select>
                                                 </td>
@@ -473,20 +543,22 @@ const NewResa = () => {
                             </table>
 
                             <div className='float-right small'>
-                                            <TableRow>
-                                                <TableCell rowSpan={3} />
-                                                <TableCell colSpan={2}>Total</TableCell>
-                                                <TableCell align="right">{totale+ ' DT'}</TableCell>
-                                            </TableRow>
-                                           
-                                        </div>
+                                <TableRow>
+                                    <TableCell rowSpan={3} />
+                                    <TableCell colSpan={2}>Total</TableCell>
+                                    <TableCell align="right">{totale + ' DT'}</TableCell>
+                                </TableRow>
+
+                            </div>
                         </div>
                     }
+                    <button className='btn bg-olive' onClick={AfficheOccupants}>Saisie Occupants</button>
+                    {affiche === 'ok' ? renderOccupants() : null}
+                  
 
-
-                    {JSON.stringify(commande)}
 
                 </div>
+                       {JSON.stringify(commande)}
             </div>
 
 

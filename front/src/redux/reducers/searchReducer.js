@@ -40,7 +40,7 @@ const searchReducer = (state = initialeState, action) => {
        
         case LOGOUT:
             return {
-                listTarif: [],
+                listSearch: [],
            
                 loading: true
             }

@@ -45,7 +45,7 @@ class TypeEtablissement
     private ?int $id = null;
 
     #[Groups(['TypeEtablissement:read', 'TypeEtablissement:create', 'TypeEtablissement:update'])]
-    #[ORM\Column(length: 255)]
+    #[ORM\Column(length: 255,unique: true)]
     private ?string $nom = null;
 
     #[Groups(['TypeEtablissement:read', 'TypeEtablissement:create', 'TypeEtablissement:update'])]

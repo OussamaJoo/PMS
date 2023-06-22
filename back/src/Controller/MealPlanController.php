@@ -38,4 +38,10 @@ public function getEtabByIdEtab(int $id, MealPlanService $mealService): Response
 
 }
 
+#[Route('/AllMealPlansByIdEtab/{id}', name: 'app_mealPlanByIdEtab', methods:'GET')]
+    public function getAllMealPlansBtIdEtab(int $id, MealPlanService $mealService): Response
+    {
+        return $this->json($mealService->getAllMealsByIdEtab($id));
+    }
+
 }

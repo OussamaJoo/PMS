@@ -22,8 +22,10 @@ const SignIn=(user,navigate)=>async dispatch=>{
 
   if(res.data.roles[0]==='ROLE_ADMIN'){
     navigate('/administration')
+  }else if(res.data.roles[0]==='ROLE_CLIENT'){
+    navigate('/client/commandes')
   }else{
-    navigate('/etablissement/etablissements')
+    navigate('/responsable/commandes')
   }
             
 

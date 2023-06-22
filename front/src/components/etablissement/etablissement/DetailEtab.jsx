@@ -43,7 +43,7 @@ const DetailEtab = () => {
   useEffect(() => {
     if (etablissement) {
 
-      setetabUpdate({ ...etablissement, nom: etablissement.nom, description: etablissement.description, nomType: etablissement?.typeEtablissement?.nom, typeEtablissement: '/api/type_etablissements/' + etablissement?.typeEtablissement?.id })
+      setetabUpdate({ ...etablissement, nom: etablissement.nom, description: etablissement.description, nomType: etablissement?.typeEtablissement?.nom, typeEtablissement: '/api/type_etablissements/' + etablissement?.typeEtablissement?.id  ,adresse : etablissement?.adresse})
 
     }
   }, [etablissement])
@@ -102,8 +102,17 @@ const DetailEtab = () => {
                 <div className='col-md-8 col-sm-8 col-8'>
                   <div className="form-group">
                     <label htmlFor="exampleInputBorder">Description</label>
-                    <input type="text" className="form-control form-control-border" placeholder="Nom"
+                    <input type="text" className="form-control form-control-border" placeholder="desc"
                       name='description' value={etabUpdate.description || ""} onChange={onChangeValue} />
+                  </div>
+
+                </div>
+
+                <div className='col-md-8 col-sm-8 col-8'>
+                  <div className="form-group">
+                    <label htmlFor="exampleInputBorder">Adresse</label>
+                    <input type="text" className="form-control form-control-border" placeholder="Adresse"
+                      name='adresse' value={etabUpdate.adresse || ""} onChange={onChangeValue} />
                   </div>
 
                 </div>

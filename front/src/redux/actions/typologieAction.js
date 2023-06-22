@@ -1,7 +1,8 @@
 import InstanceAxios from "../../InstanceAxios"
 import {TYPOLOGIE_ERROR,GET_TYPOLOGIE,GET_TYPOLOGIE_BY_ID,
         GET_TYPOLOGIE_BY_ID_ERROR,SAVE_TYPOLOGIE,SAVE_TYPOLOGIE_ERROR,
-        REMOVE_SELECTED_TYPOLOGIE , UPDATE_TYPOLOGIE_ERROR, UPDATE_TYPOLOGIE} from "../type/typologie";
+        REMOVE_SELECTED_TYPOLOGIE , UPDATE_TYPOLOGIE_ERROR, UPDATE_TYPOLOGIE,
+        GET_TYPOLOGIE_BY_ID_ETAB,TYPOLOGIE_BY_ID_ETAB_ERROR} from "../type/typologie";
 import {ISLOADING,LOADING} from "../type/loading"
 import {TYPOLOGIE_URL} from "../url"
 import {toast} from "react-toastify"
@@ -26,6 +27,25 @@ const getTypologie=()=>async dispatch=>{
         })
 }
 
+const getTypologieByIdEtab=(idEtab)=>async dispatch=>{
+    await InstanceAxios.get('http://localhost:8000/api/typologieByIdEtab/'+idEtab).then(
+        response=>{
+            dispatch({
+                type:GET_TYPOLOGIE_BY_ID_ETAB,
+                payload:response.data
+            })
+            dispatch({
+                type:ISLOADING,
+            })
+            
+        }).catch(error=>{
+            dispatch({
+                type:TYPOLOGIE_BY_ID_ETAB_ERROR,
+                payload:error
+            })
+        })
+}
+
 const saveTypologie=(order,navigate)=>async dispatch=>{
     await InstanceAxios.post(TYPOLOGIE_URL,order, { withCredentials: false }).then(
         response=>{
@@ -42,6 +62,24 @@ const saveTypologie=(order,navigate)=>async dispatch=>{
             
         })
 }
+
+const saveTypologie2=(order,navigate)=>async dispatch=>{
+    await InstanceAxios.post(TYPOLOGIE_URL,order, { withCredentials: false }).then(
+        response=>{
+            dispatch({
+                type:SAVE_TYPOLOGIE,
+                payload:response.data
+            })
+            navigate('/responsable/typologies')
+            toast.success("Le typologie a été enregistré",{position:toast.POSITION.BOTTOM_LEFT})
+        }).catch(error=>{
+            dispatch({
+                type:SAVE_TYPOLOGIE_ERROR
+            })
+            
+        })
+}
+
 const updateTypologie=(order,idOrder,navigate)=>async dispatch=>{
     await InstanceAxios.put(TYPOLOGIE_URL+'/'+idOrder,order ).then(
         response=>{
@@ -49,7 +87,7 @@ const updateTypologie=(order,idOrder,navigate)=>async dispatch=>{
                 type:UPDATE_TYPOLOGIE,
                 payload:response.data
             })
-           navigate('/etablissement/typologie/'+idOrder)
+           
            
            toast.success("Le typologie a été modifié",{position:toast.POSITION.BOTTOM_LEFT})
         }).catch(error=>{
@@ -111,4 +149,4 @@ const removeSelectedTypologie=()=> dispatch =>{
 
 
 export {getTypologie,saveTypologie,getTypologieById,
-        removeSelectedTypologie,updateTypologie,getTypologieById2} 
+        removeSelectedTypologie,updateTypologie,getTypologieById2,getTypologieByIdEtab,saveTypologie2} 

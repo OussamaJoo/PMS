@@ -45,7 +45,7 @@ const ListRoles = () => {
                
                <div className="col-12 col-sm-6 col-md-3">
                <div className="info-box mb-3">
-                 <span className="info-box-icon bg-warning elevation-1">{role.roleName[0]}</span>
+                 <span className="info-box-icon bg-warning elevation-1">{role.roleName[0]+role.roleName[5]}</span>
    
                  <div className="info-box-content">
                    <span className="info-box-number">{role.roleName}</span>

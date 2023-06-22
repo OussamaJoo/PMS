@@ -2,8 +2,10 @@
 
 namespace App\Repository;
 
+use App\Entity\Etablissement;
 use App\Entity\Prix;
 use App\Service\PrixService;
+use DateTime;
 use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\Query\ResultSetMapping;
 use Doctrine\DBAL\Statement\fetchAll;
@@ -53,6 +55,8 @@ class AvailibilityRepository
 
 
     }
+
+
 
     public function searchHotelsMultiRooms(Request $req)
     {
@@ -274,7 +278,7 @@ class AvailibilityRepository
 
 
         foreach($rooms as $room) {
-            $dateDe = new \DateTime($datas['dateDe']);
+            $dateDe = new \DateTime($datas['dateDu']);
             $dateAu = new \DateTime($datas['dateAu']);
             $somme=0;
             $ok = true;
@@ -337,6 +341,188 @@ class AvailibilityRepository
         return $results;
 
 
+
+
+    }
+
+    public function getHotelsWithCombainaisonPossile(String $hotel, int $nbrAdultes, int $nbrChambres, int $nbEnf, int $nbBebe)
+    {
+        $div = floor($nbrAdultes/$nbrChambres-1);
+        $div2 = $nbrAdultes-1;
+        if($nbrChambres==1) {
+            $div = floor($nbrAdultes/$nbrChambres);
+            $div2 = $nbrAdultes;
+        }
+        // Requête pour récupérer tous les hôtels disponibles dans la ville spécifiée
+        $hotelsQuery = $this->entityManager->createQuery("
+         SELECT h,t
+         FROM App\Entity\Etablissement h
+         join App\Entity\Typologie t
+         WHERE h.adresse = :location OR h.nom = :location AND 
+         t.etablissement = h.id
+         AND t.capacite between :numAdults and :numAdults2
+         AND t.Accept_enfant = :nbEnf AND t.Accecpt_bebe = :nbBebe
+
+         ")->setParameter('location', $hotel)
+        ->setParameter('numAdults', $div)
+        ->setParameter('numAdults2', $div2)
+         ->setParameter('nbEnf', $nbEnf)
+        ->setParameter('nbBebe', $nbBebe);
+
+        $hotels = $hotelsQuery->getResult();
+        return $hotels;
+
+    }
+
+
+
+
+
+
+
+
+
+
+
+    public function getHotel(int $id)
+    {
+        $hotelQuery = $this->entityManager->createQuery("
+        SELECT h
+        FROM App\Entity\Etablissement h
+        WHERE h.id = :id 
+    ")->setParameter('id', $id);
+
+        $hotel = $hotelQuery->getOneOrNullResult();
+
+        return $hotel;
+    }
+
+
+    public function getHotels(String $hotel)
+    {
+
+        // Requête pour récupérer tous les hôtels disponibles dans la ville spécifiée
+        $hotelsQuery = $this->entityManager->createQuery("
+         SELECT h
+         FROM App\Entity\Etablissement h
+         WHERE h.adresse = :location OR h.nom = :location
+     ")->setParameter('location', $hotel);
+
+        $hotels = $hotelsQuery->getResult();
+        return $hotels;
+
+    }
+
+
+
+    public function getCombainisonSansEnfAndBebe(int $hotelId, int $nbrAdultes, int $nbrChambres)
+    {
+        $div = floor($nbrAdultes/$nbrChambres-1);
+        $div2 = $nbrAdultes-1;
+        if($nbrChambres==1) {
+            $div = floor($nbrAdultes/$nbrChambres);
+            $div2 = $nbrAdultes;
+        }
+        $roomsQuery = $this->entityManager->createQuery("
+                    SELECT r
+                    FROM App\Entity\Typologie r
+                    WHERE r.etablissement = :hotel
+                    AND r.capacite between :numAdults and :numAdults2
+                  
+                ")->setParameter('hotel', $hotelId)
+                  ->setParameter('numAdults', $div)
+                  ->setParameter('numAdults2', $div2);
+
+
+        return $roomsQuery->getResult();
+    }
+
+    public function getCombainison(int $hotelId, int $nbrAdultes, int $nbrChambres, int $nbEnf, int $nbBebe)
+    {
+        $div = floor($nbrAdultes/$nbrChambres-1);
+        $div2 = $nbrAdultes-1;
+        if($nbrChambres==1) {
+            $div = floor($nbrAdultes/$nbrChambres);
+            $div2 = $nbrAdultes;
+        }
+        $query = ("
+        SELECT r
+        FROM App\Entity\Typologie r
+        WHERE r.etablissement = :hotel
+        AND r.capacite between :numAdults and :numAdults2");
+        
+        if($nbEnf) {
+            $query.="
+            AND r.Accept_enfant = :nbEnf";
+        }
+        if($nbBebe) {
+            $query.="
+            AND r.Accecpt_bebe = :nbBebe";
+        }
+        $roomsQuery = $this->entityManager->createQuery($query)
+                  ->setParameter('hotel', $hotelId)
+                  ->setParameter('numAdults', $div)
+                  ->setParameter('numAdults2', $div2);
+        if($nbEnf) {
+            $roomsQuery->setParameter('nbEnf', $nbEnf);
+        }
+        if($nbBebe) {
+            $roomsQuery->setParameter('nbBebe', $nbBebe);
+        }
+        
+
+        return $roomsQuery->getResult();
+    }
+
+    public function getSumPrix(DateTime $datedebut, DateTime $datefin, int $idTypo)
+    {
+
+        $prixQuery = $this->entityManager->createQuery("
+        SELECT SUM(p.montant) AS total
+        FROM App\Entity\Prix p
+        WHERE p.datePrix between :datedeb and :datefin AND p.typologie = :val2")
+        ->setParameter('val2', $idTypo)
+        ->setParameter('datedeb', $datedebut)
+        ->setParameter('datefin', $datefin);
+        $result =  $prixQuery->getSingleScalarResult();
+        return $result;
+
+    }
+
+    public function getTotaleTypoDispo(DateTime $datedebut, DateTime $datefin, int $idTypo)
+    {
+        $prixQuery = $this->entityManager->createQuery("
+        SELECT AVG(d.qte) 
+        FROM App\Entity\Disponibilite d
+        WHERE d.date between :datedeb and :datefin AND d.typologie = :val2")
+        ->setParameter('val2', $idTypo)
+        ->setParameter('datedeb', $datedebut)
+        ->setParameter('datefin', $datefin);
+        
+        $result =  $prixQuery->getSingleScalarResult();
+        return  floor($result);
+
+    }
+
+
+    public function checkAvailibility(DateTime $datedebut, DateTime $datefin, int $idTypo,int $qte)
+    {
+
+        $dispoQuery = $this->entityManager->createQuery("
+        SELECT d
+        FROM App\Entity\Disponibilite d
+        WHERE d.date between :datedeb and :datefin AND d.typologie = :val2 AND d.qte >= :qte")
+        ->setParameter('val2', $idTypo)
+        ->setParameter('datedeb', $datedebut)
+        ->setParameter('datefin', $datefin)
+        ->setParameter('qte', $qte);
+        $result =  $dispoQuery->getResult();
+
+        $diff = $datedebut->diff($datefin);
+        $s =  $diff->format('%a');
+        $t = (int)$s+1;
+        
+        return (count($result)==$t);
 
 
     }

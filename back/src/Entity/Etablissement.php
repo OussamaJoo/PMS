@@ -12,6 +12,9 @@ use DateTime;
 
 #[ORM\Entity(repositoryClass: EtablissementRepository::class)]
 #[ApiResource]
+#[ORM\UniqueConstraint(
+    columns:["nom", "adresse","type_etablissement_id"]
+)]
 class Etablissement
 {
     #[ORM\Id]
@@ -46,6 +49,9 @@ class Etablissement
     #[ORM\Column(length: 255)]
     private ?string $adresse = null;
 
+    #[ORM\OneToMany(mappedBy: 'etablissement', targetEntity: Commande::class)]
+    private Collection $idCommande;
+
     public function __construct()
     {
         $this->updated_at = new \DateTime();
@@ -53,6 +59,7 @@ class Etablissement
         $this->idTypologie = new ArrayCollection();
         $this->idMealPlan = new ArrayCollection();
         $this->idReservation = new ArrayCollection();
+        $this->idCommande = new ArrayCollection();
         
     }
 
@@ -223,6 +230,36 @@ class Etablissement
     public function setAdresse(string $adresse): self
     {
         $this->adresse = $adresse;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Commande>
+     */
+    public function getIdCommande(): Collection
+    {
+        return $this->idCommande;
+    }
+
+    public function addIdCommande(Commande $idCommande): self
+    {
+        if (!$this->idCommande->contains($idCommande)) {
+            $this->idCommande->add($idCommande);
+            $idCommande->setEtablissement($this);
+        }
+
+        return $this;
+    }
+
+    public function removeIdCommande(Commande $idCommande): self
+    {
+        if ($this->idCommande->removeElement($idCommande)) {
+            // set the owning side to null (unless already changed)
+            if ($idCommande->getEtablissement() === $this) {
+                $idCommande->setEtablissement(null);
+            }
+        }
 
         return $this;
     }

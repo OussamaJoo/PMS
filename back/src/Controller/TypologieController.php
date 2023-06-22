@@ -33,6 +33,16 @@ class TypologieController extends AbstractController
         return $this->json($typo);
     }
 
+    #[Route('/typologieByIdEtab/{id}', name: 'app_typoIdEtab', methods:'GET')]
+    public function getEtabByIdEtab(int $id, TypologieService $typoService): Response
+    {
+        $res = $typoService->getAllTypologiesByIdEtab($id);
+
+
+        return $this->json($res);
+
+    }
+
 
    
 }

@@ -163,7 +163,7 @@ const DetailDispo = () => {
                     />
                   </div>
                 </div>
-{JSON.stringify(dispoUpdate)}
+
               </div>
 
             </form>

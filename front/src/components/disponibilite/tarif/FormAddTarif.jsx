@@ -6,6 +6,7 @@ import { DateTimePickerComponent } from '@syncfusion/ej2-react-calendars';
 import Autocomplete, { createFilterOptions } from '@mui/material/Autocomplete';
 import TextField from '@mui/material/TextField';
 import { loadingComponent } from '../../../redux/actions/loadingAction'
+import {toast} from "react-toastify"
 
 
 const FormAddTarif = () => {
@@ -13,8 +14,8 @@ const FormAddTarif = () => {
   const dispatch = useDispatch()
   const navigate = useNavigate()
   const [tarif, settarif] = useState({
-    dateDe: new Date(),
-    dateAu: new Date(),
+    dateDe: '',
+    dateAu: '',
     montant: '',
     nomTypologie: '',
     typologie: '',
@@ -34,11 +35,18 @@ const FormAddTarif = () => {
 
   const savecarre = e => {
     e.preventDefault()
-    dispatch(saveTarif(tarif, navigate))
-    dispatch(loadingComponent())
-    setTimeout(() => {
 
-    }, 1000);
+    if (tarif.dateDe == '' || tarif.dateAu == '' || tarif.nomEtab == '' || tarif.nomTypologie == '' || tarif.montant == '') {
+      toast.error("if faut remplir tous les champs", { position: toast.POSITION.BOTTOM_LEFT })
+    } else if (tarif.dateDe > tarif.dateAu) {
+      toast.error("if faut que date Du > date Au", { position: toast.POSITION.BOTTOM_LEFT })
+    } else {
+      dispatch(saveTarif(tarif, navigate))
+      dispatch(loadingComponent())
+      setTimeout(() => {
+
+      }, 1000);
+    }
   }
 
 

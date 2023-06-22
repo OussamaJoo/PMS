@@ -4,6 +4,7 @@ import { Link, useNavigate } from 'react-router-dom'
 import { saveMealPlan } from '../../../redux/actions/mealPlanAction'
 import Autocomplete, { createFilterOptions } from '@mui/material/Autocomplete';
 import TextField from '@mui/material/TextField';
+import { toast } from "react-toastify"
 
 
 
@@ -14,7 +15,7 @@ const FormAddMeal = () => {
   const [meal, setmeal] = useState({
     nom: '',
     description: '',
-    nomEtab:'',
+    nomEtab: '',
     etablissement: '',
     prix: ''
 
@@ -31,8 +32,12 @@ const FormAddMeal = () => {
 
   const savecarre = e => {
     e.preventDefault()
-   
-    dispatch(saveMealPlan(meal, navigate))
+
+    if (meal.nomEtab == '' || meal.nom == ' ' || meal.description == '' || meal.prix == '') {
+      toast.error("il faut remplir tous les champs", { position: toast.POSITION.BOTTOM_LEFT })
+    } else {
+      dispatch(saveMealPlan(meal, navigate))
+    }
 
   }
 
@@ -55,10 +60,10 @@ const FormAddMeal = () => {
   }
 
 
- 
 
 
- 
+
+
   return (
     <div className="content-wrapper">
       <section className="content-header">
@@ -85,11 +90,11 @@ const FormAddMeal = () => {
 
           <form encType="multipart/form-data">
 
-          
+
             <div className='row'>
               <div className='col-md-8 col-sm-8 col-8'>
 
-              <div className="form-group">
+                <div className="form-group">
                   <label htmlFor="exampleInputBorder">Etablissement </label>
                   <Autocomplete
                     PaperProps={{
@@ -102,9 +107,9 @@ const FormAddMeal = () => {
                     onChange={(evt, newValue) => {
 
 
-                      setmeal({ ...meal, nomEtab: newValue?.nom , etablissement : '/api/etablissements/'+newValue?.id })
-                     
-                      
+                      setmeal({ ...meal, nomEtab: newValue?.nom, etablissement: '/api/etablissements/' + newValue?.id })
+
+
 
                     }}
                     filterOptions={(options, params) => {
@@ -154,11 +159,11 @@ const FormAddMeal = () => {
                     name='prix' value={meal.prix} onChange={onChangeValue1} />
                 </div>
 
-               
-                
-              
+
+
+
               </div>
-{JSON.stringify(meal)}
+
             </div>
           </form>
         </div>

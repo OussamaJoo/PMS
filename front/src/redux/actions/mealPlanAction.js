@@ -60,6 +60,22 @@ const saveMealPlan=(order,navigate)=>async dispatch=>{
             })
         })
 }
+const saveMealPlan2=(order,navigate)=>async dispatch=>{
+    await InstanceAxios.post(MEALPLAN_URL,order, { withCredentials: false }).then(
+        response=>{
+            dispatch({
+                type:SAVE_MEALPLAN,
+                payload:response.data
+            })
+            navigate('/responsable/mealPlans')
+            toast.success("Le Meal Plan a été enregistré",{position:toast.POSITION.BOTTOM_LEFT})
+        }).catch(error=>{
+            dispatch({
+                type:SAVE_MEALPLAN_ERROR
+            })
+        })
+}
+
 const updateMealPlan=(order,idOrder,navigate)=>async dispatch=>{
     await InstanceAxios.put(MEALPLAN_URL+'/'+idOrder,order ).then(
         response=>{
@@ -67,7 +83,7 @@ const updateMealPlan=(order,idOrder,navigate)=>async dispatch=>{
                 type:UPDATE_MEALPLAN,
                 payload:response.data
             })
-           navigate('/etablissement/mealPlan/'+idOrder)
+           
            
            toast.success("Le Meal Plan a été modifié",{position:toast.POSITION.BOTTOM_LEFT})
         }).catch(error=>{
@@ -109,4 +125,4 @@ const removeSelectedMealPlan=()=> dispatch =>{
 
 
 export {getMealPlan,saveMealPlan,getMealPlanById,
-        removeSelectedMealPlan,updateMealPlan,getMealPlanByIdEtab} 
+        removeSelectedMealPlan,updateMealPlan,getMealPlanByIdEtab,saveMealPlan2} 

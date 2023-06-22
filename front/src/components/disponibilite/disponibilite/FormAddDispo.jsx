@@ -6,6 +6,7 @@ import { DateTimePickerComponent } from '@syncfusion/ej2-react-calendars';
 import Autocomplete, { createFilterOptions } from '@mui/material/Autocomplete';
 import TextField from '@mui/material/TextField';
 import { loadingComponent } from '../../../redux/actions/loadingAction'
+import {toast} from "react-toastify"
 
 
 const FormAddDispo = () => {
@@ -13,8 +14,8 @@ const FormAddDispo = () => {
   const dispatch = useDispatch()
   const navigate = useNavigate()
   const [dispo, setdispo] = useState({
-    dateDe: new Date(),
-    dateAu: new Date(),
+    dateDe: '',
+    dateAu: '',
     qte: '',
     nomTypologie: '',
     typologie: '',
@@ -34,11 +35,19 @@ const FormAddDispo = () => {
 
   const savecarre = e => {
     e.preventDefault()
-    dispatch(saveDispo(dispo, navigate))
-    dispatch(loadingComponent())
-    setTimeout(() => {
 
-    }, 1000);
+    if (dispo.dateDe == '' || dispo.dateAu == '' || dispo.nomEtab == '' || dispo.nomTypologie == '' || dispo.qte == '') {
+      toast.error("if faut remplir tous les champs", { position: toast.POSITION.BOTTOM_LEFT })
+    } else if (dispo.dateDe > dispo.dateAu) {
+      toast.error("if faut que date Du > date Au", { position: toast.POSITION.BOTTOM_LEFT })
+    } else {
+      dispatch(saveDispo(dispo, navigate))
+      dispatch(loadingComponent())
+      setTimeout(() => {
+
+      }, 1000);
+    }
+
   }
 
   const onChangeValue1 = (e) => {
@@ -168,7 +177,7 @@ const FormAddDispo = () => {
                   onChange={(evt, newValue) => {
 
 
-                    setdispo({ ...dispo, nomTypologie: newValue?.nom , typologie: newValue?.id })
+                    setdispo({ ...dispo, nomTypologie: newValue?.nom, typologie: newValue?.id })
 
 
 
@@ -209,7 +218,7 @@ const FormAddDispo = () => {
               <div className='col-8'>
 
                 <input type="number" className="form-control form-control-border" placeholder="0"
-                  name='qte' value={dispo.qte} onChange={onChangeValue1} />
+                  name='qte' value={dispo.qte} onChange={onChangeValue1} required />
               </div>
 
 

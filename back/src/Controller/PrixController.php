@@ -49,14 +49,15 @@ public function getEtabById(int $id, PrixService $prixService): Response
     return $this->json($tarif);
 }
 
-#[Route('/SumPrix', name: 'app_tarifSum', methods:'GET')]
-public function getPrixByIntervalle(Request $req, PrixService $prixService): Response
+#[Route('/AllTarifByIdEtab/{id}', name: 'app_AllTarifByIdEtab', methods:'GET')]
+public function getAllTarifByIdEtab(int $id, PrixService $prixService): Response
 {
 
-    $tarif = $prixService->SumPrix($req);
-   
+    $tarif = $prixService->getAllTarifsByIdEtab($id);
 
     return $this->json($tarif);
 }
+
+
 
 }

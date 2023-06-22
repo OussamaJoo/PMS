@@ -11,4 +11,6 @@ export const TARIF8YRL="/api/prixes"
 export const MEALPLAN_URL="/api/meal_plans"
 export const OCCUPANT_URL="/api/occupants"
 export const RESERVATION_URL="/api/reservations"
+export const CLIENT_URL="/api/clients"
+export const COMMANDE_URL="/api/commandes"
 

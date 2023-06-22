@@ -85,6 +85,16 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\OneToMany(mappedBy: 'User', targetEntity: Log::class)]
     private Collection $logs;
 
+    
+    #[Groups(['user:read','user:create', 'user:update'])]
+    #[ORM\OneToOne(cascade: ['persist', 'remove'])]
+    private ?Client $idClient = null;
+
+    
+    #[Groups(['user:read','user:create', 'user:update'])]
+    #[ORM\OneToOne(cascade: ['persist', 'remove'])]
+    private ?Etablissement $idEtablissement = null;
+
     public function __construct()
     {
         $this->role = new ArrayCollection();
@@ -264,6 +274,30 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
                 $log->setUser(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getIdClient(): ?Client
+    {
+        return $this->idClient;
+    }
+
+    public function setIdClient(?Client $idClient): self
+    {
+        $this->idClient = $idClient;
+
+        return $this;
+    }
+
+    public function getIdEtablissement(): ?Etablissement
+    {
+        return $this->idEtablissement;
+    }
+
+    public function setIdEtablissement(?Etablissement $idEtablissement): self
+    {
+        $this->idEtablissement = $idEtablissement;
 
         return $this;
     }

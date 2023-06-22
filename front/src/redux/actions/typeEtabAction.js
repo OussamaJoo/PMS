@@ -40,7 +40,7 @@ const saveTypeEtabs=(typeEtab,navigate)=>async dispatch=>{
             dispatch({
                 type:SAVE_TYPEETAB_ERROR
             })
-            toast.success({error},{position:toast.POSITION.BOTTOM_LEFT})
+            toast.error('Type déja existe',{position:toast.POSITION.BOTTOM_LEFT})
         })
 }
 
@@ -51,7 +51,7 @@ const updateTypeEtab=(typeEtab,idTypeEtab,navigate)=>async dispatch=>{
                 type:UPDATE_TYPEETAB,
                 payload:response.data
             })
-           navigate('/etablissement/type/'+idTypeEtab)
+          
            toast.success("La typeEtab a été modifié",{position:toast.POSITION.BOTTOM_LEFT})
 
         }).catch(error=>{

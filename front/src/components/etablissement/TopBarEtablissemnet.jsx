@@ -33,6 +33,10 @@ const TopBarEtablissement = () => {
             <li className="nav-item d-none d-sm-inline-block">
             <Link className="nav-link" to={"/etablissement/mealPlans"}>Meal Plan</Link>
             </li>
+
+            <li className="nav-item d-none d-sm-inline-block">
+            <Link className="nav-link" to={"/etablissement/clients"}>Client</Link>
+            </li>
            
            
             </ul>

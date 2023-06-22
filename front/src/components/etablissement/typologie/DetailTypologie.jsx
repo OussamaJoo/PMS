@@ -38,7 +38,9 @@ const DetailTypologie = () => {
   }, [dispatch]);
   useEffect(() => {
     if (typologie) {
-      settypologieUpdate(typologie)
+      settypologieUpdate({...TypologieUpdate, nom : typologie.nom , capacite : typologie.capacite , acceptEnfant: typologie.acceptEnfant,
+        accecptBebe:typologie.accecptBebe,acceptHandicapé:typologie.acceptHandicapé,annulable:typologie.annulable,
+        remborsable:typologie.remborsable,etablissement:'/api/etablissements/'+typologie?.etablissement?.id})
 
     }
   }, [typologie])
@@ -95,14 +97,14 @@ const DetailTypologie = () => {
           {loading ? <LoadingSpinner /> :
             <form>
               <div className='row'>
-              <div className='col-md-4 col-sm-4 col-4'>
+              <div className='col-md-10 col-sm-10 col-10'>
                   <div className="form-group">
                     <label htmlFor="exampleInputBorder">Etablissement </label>
                         <h5>{typologie?.etablissement?.nom}</h5>
 
                   </div>
                 </div>
-                <div className='col-md-10 col-sm-10 col-10'>
+                <div className='col-md-6 col-sm-6 col-6'>
                   <div className="form-group">
                     <label htmlFor="exampleInputBorder">Nom </label>
 
@@ -111,15 +113,7 @@ const DetailTypologie = () => {
                   </div>
                 </div>
 
-                <div className='col-md-6 col-sm-6 col-6'>
-                  <div className="form-group">
-                    <label htmlFor="exampleInputBorder">Categorie </label>
-
-                    <input type="text" className="form-control form-control-border" placeholder="Ecrire Ici"
-                      name='categorie' value={typologieUpdate.categorie} onChange={onChangeValue} />
-                  </div>
-                </div>
-
+                
                 <div className='col-md-4 col-sm-4 col-4'>
                   <div className="form-group">
                     <label htmlFor="exampleInputBorder">Capacité </label>
@@ -140,11 +134,11 @@ const DetailTypologie = () => {
                   <ToggleButton
                     inactiveLabel={'no'}
                     activeLabel={'yes'}
-                    value={typologieUpdate.acceptEnfant}
+                    value={typologieUpdate.acceptEnfant ||false}
 
                     onToggle={(value) => {
                       settypologieUpdate({
-                        ...typologie,
+                        ...typologieUpdate,
                         acceptEnfant: !value,
                       })
                     }} />
@@ -161,11 +155,11 @@ const DetailTypologie = () => {
                   <ToggleButton
                     inactiveLabel={'no'}
                     activeLabel={'yes'}
-                    value={typologieUpdate.accecptBebe}
+                    value={typologieUpdate.accecptBebe ||false}
 
                     onToggle={(value) => {
                       settypologieUpdate({
-                        ...typologie,
+                        ...typologieUpdate,
                         accecptBebe: !value,
                       })
                     }} />
@@ -181,11 +175,11 @@ const DetailTypologie = () => {
                   <ToggleButton
                     inactiveLabel={'no'}
                     activeLabel={'yes'}
-                    value={typologieUpdate.acceptHandicapé}
+                    value={typologieUpdate.acceptHandicapé ||false}
 
                     onToggle={(value) => {
                       settypologieUpdate({
-                        ...typologie,
+                        ...typologieUpdate,
                         acceptHandicapé: !value,
                       })
                     }} />
@@ -201,11 +195,11 @@ const DetailTypologie = () => {
                   <ToggleButton
                     inactiveLabel={'no'}
                     activeLabel={'yes'}
-                    value={typologieUpdate.annulable}
+                    value={typologieUpdate.annulable ||false}
 
                     onToggle={(value) => {
                       settypologieUpdate({
-                        ...typologie,
+                        ...typologieUpdate,
                         annulable: !value,
                       })
                     }} />
@@ -221,17 +215,17 @@ const DetailTypologie = () => {
                   <ToggleButton
                     inactiveLabel={'no'}
                     activeLabel={'yes'}
-                    value={typologieUpdate.remborsable}
+                    value={typologieUpdate.remborsable ||false}
 
                     onToggle={(value) => {
                       settypologieUpdate({
-                        ...typologie,
+                        ...typologieUpdate,
                         remborsable: !value,
                       })
                     }} />
 
                 </div>
-{JSON.stringify(typologieUpdate)}
+
               </div>
 
 

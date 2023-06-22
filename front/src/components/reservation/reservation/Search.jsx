@@ -14,7 +14,7 @@ const Search = () => {
     const [listItems, setListItems] = useState([]);
     const [showList, setShowList] = useState(false);
     const [search, setsearch] = useState({
-        dateDe: '',
+        dateDu: '',
         dateAu: '',
         adresse: '',
         nbChambres: 0,
@@ -34,7 +34,7 @@ const Search = () => {
 
     const fetchData = async () => {
         try {
-            let response = await InstanceAxios.post('http://localhost:8000/api/search', search, { withCredentials: false })
+            let response = await InstanceAxios.post('http://localhost:8000/api/getAllComb', search, { withCredentials: false })
 
             setListItems(await response.data);
 
@@ -59,8 +59,8 @@ const Search = () => {
 
             
 
-        if (search.dateDe != "Invalid date" && search.dateAu != "Invalid date" && search.nbAdultes != 0 && search.nbChambres != 0) {
-            if(search?.dateDe >= search?.dateAu){
+        if (search.dateDu != "Invalid date" && search.dateAu != "Invalid date" && search.nbAdultes != 0 && search.nbChambres != 0) {
+            if(search?.dateDu >= search?.dateAu){
                 toast.error("if faut que date Du > date Au", { position: toast.POSITION.BOTTOM_LEFT })
             setsearch(
                 {
@@ -68,7 +68,7 @@ const Search = () => {
                     ok: false,
                 })
             }else{
-            const start = moment(search?.dateDe);
+            const start = moment(search?.dateDu);
         const end = moment(search?.dateAu);
         const days = end.diff(start, 'days');
         console.log(days)
@@ -148,7 +148,7 @@ const Search = () => {
 
                                     <div className='col-5'>
                                         <small><b>Date debut</b></small>
-                                        <DateTimePickerComponent format="yyyy-MM-dd" value={search?.dateDe} onChange={e => setsearch({ ...search, dateDe: moment(e.target.value).format('YYYY-MM-DD') })} placeholder='Choose a date and time' ></DateTimePickerComponent>
+                                        <DateTimePickerComponent format="yyyy-MM-dd" value={search?.dateDu} onChange={e => setsearch({ ...search, dateDu: moment(e.target.value).format('YYYY-MM-DD') })} placeholder='Choose a date and time' ></DateTimePickerComponent>
                                     </div>
                                     <div className='col-5'>
                                         <small><b>Date Fin</b></small>
@@ -216,7 +216,7 @@ const Search = () => {
                         </div>
                  
                 </section>
-                                              
+                                                 
             </div>
 
         </>

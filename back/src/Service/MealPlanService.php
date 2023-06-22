@@ -86,4 +86,25 @@ class MealPlanService
     }
 
 
+    public function getAllMealsByIdEtab(int $id){
+        $meals[] = new MealPlan();
+        $meals = $this->mealRepo -> findByIdEatb($id);
+        $data = [];
+       
+        foreach ($meals as $meal) { 
+           
+
+            $data[] = [
+                'id' => $meal->getId(),
+                'nom' => $meal->getNom(),
+                'description' => $meal->getDescription(),
+                'etablissement' => $meal->getEtablissement(),
+                'prix' => $meal->getPrix()
+
+            ];
+        }
+        return $data;
+    }
+
+
 }

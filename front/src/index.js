@@ -1,17 +1,24 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 import { BrowserRouter } from 'react-router-dom';
-import { Provider } from 'react-redux';
+import { Provider , useDispatch } from 'react-redux';
 import store,{Persistor} from './redux/store'
 import axios from 'axios';
 import {PersistGate} from 'redux-persist/integration/react'
 
+
+
+
+
+
 //axios.defaults.baseURL="http://localhost:8787/"
 //const AUTH_TOKEN=localStorage.getItem('token')
 //axios.defaults.headers.common['Authorization'] = AUTH_TOKEN;
+
+
 
 
 

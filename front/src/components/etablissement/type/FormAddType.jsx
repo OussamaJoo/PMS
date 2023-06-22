@@ -3,6 +3,7 @@ import { useDispatch } from 'react-redux'
 import { Link, useNavigate } from 'react-router-dom'
 import { loadingComponent } from '../../../redux/actions/loadingAction'
 import { saveTypeEtabs } from '../../../redux/actions/typeEtabAction'
+import { toast } from "react-toastify"
 
 
 const FormAddType = () => {
@@ -20,7 +21,12 @@ const FormAddType = () => {
 
   const savecarre = e => {
     e.preventDefault()
-    dispatch(saveTypeEtabs(type, navigate))
+    if(type.nom == null){
+      toast.error("il faut remplir tous les champs", { position: toast.POSITION.BOTTOM_LEFT })
+    }else{
+      dispatch(saveTypeEtabs(type, navigate))
+    }
+    
   }
 
   const onChangeValue = (e) => {

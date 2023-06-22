@@ -35,12 +35,22 @@ class JWTCreatedListener
         }
 
         if ($user instanceof User) {
+            $idClient = null;
+            $idEtablissement = null;
+            if($user->getIdClient()!= null){
+                $idClient = $user->getIdClient()->getId();
+            }
+            if($user->getIdEtablissement()!=null){
+                $idEtablissement = $user->getIdEtablissement()->getId();
+            }
             $data += array(
                 'id'        => $user->getId(),
                 'email'     => $user->getEmail(),
                 'roles'     => $user->getRoles(),
                 'nom'       => $user->getNom(),
                 'prenom'    => $user->getPrenom(),
+                'idClient'  => $idClient,
+                'idEtablissement'   => $idEtablissement
             );
         }
 

@@ -22,8 +22,7 @@ class Typologie
     #[ORM\Column(length: 255)]
     private ?string $nom = null;
 
-    #[ORM\Column(length: 255)]
-    private ?string $categorie = null;
+  
 
     #[ORM\Column]
     private ?int $capacite = null;
@@ -90,17 +89,7 @@ class Typologie
         return $this;
     }
 
-    public function getCategorie(): ?string
-    {
-        return $this->categorie;
-    }
-
-    public function setCategorie(string $categorie): self
-    {
-        $this->categorie = $categorie;
-
-        return $this;
-    }
+ 
 
     public function getCapacite(): ?int
     {

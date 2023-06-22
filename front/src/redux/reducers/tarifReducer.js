@@ -3,12 +3,14 @@ import {
     TARIF_ERROR, GET_TARIF, GET_TARIF_BY_ID,
     GET_TARIF_BY_ID_ERROR, SAVE_TARIF, SAVE_TARIF_ERROR,
     CONFIRMATION_TARIF_BY_ID, CONFIRMATION_TARIF_BY_ID_ERROR, REMOVE_SELECTED_TARIF,
-    CREATE_FACTURE, CREATE_FACTURE_ERROR, UPDATE_TARIF, UPDATE_TARIF_ERROR, UPLOAD_PDF_FACTURE
+    CREATE_FACTURE, CREATE_FACTURE_ERROR, UPDATE_TARIF, UPDATE_TARIF_ERROR, UPLOAD_PDF_FACTURE,
+    GET_ALL_TARIF_BY_ID_ETAB,  ALL_TARIF_BY_ID_ETAB_ERROR
 } from "../type/tarif";
 import { ISLOADING, LOADING } from "../type/loading"
 
 const initialeState = {
     listTarif: [],
+    listTarifByIdEtab: [],
     tarif: {},
     loading: true
 }
@@ -22,6 +24,18 @@ const tarifReducer = (state = initialeState, action) => {
 
             }
         case TARIF_ERROR:
+            return {
+                ...state,
+                error: action.payload,
+
+            }
+        case GET_ALL_TARIF_BY_ID_ETAB:
+            return {
+                ...state,
+                listTarifByIdEtab: action.payload,
+
+            }
+        case ALL_TARIF_BY_ID_ETAB_ERROR:
             return {
                 ...state,
                 error: action.payload,
@@ -91,13 +105,14 @@ const tarifReducer = (state = initialeState, action) => {
         case LOGOUT:
             return {
                 listTarif: [],
+                listTarifByIdEtab: [],
                 tarif: {},
                 loading: true
             }
-            case UPLOAD_PDF_FACTURE:
+        case UPLOAD_PDF_FACTURE:
             return {
                 ...state
-                
+
             };
         default:
             return state;

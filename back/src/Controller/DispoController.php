@@ -49,6 +49,15 @@ public function getEtabById(int $id, DispoService $dispoService): Response
 
 }
 
+#[Route('/AllDispoByIdEtab/{id}', name: 'app_AlldispoByIdEtab', methods:'GET')]
+public function allDispoByIdEtab(int $id, DispoService $dispoService): Response
+{
+    $dispo = $dispoService->getAllDisposByIdEtab($id);
+ 
+    return $this->json($dispo);
+
+}
+
 
 
 

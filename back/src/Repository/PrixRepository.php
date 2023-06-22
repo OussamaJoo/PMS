@@ -65,4 +65,25 @@ class PrixRepository extends ServiceEntityRepository
             ->getOneOrNullResult()
        ;
     }
+
+
+    public function findByIdEatb(int $id): array {
+        $hotelsQuery = $this->getEntityManager()->createQuery("
+        SELECT p
+        FROM App\Entity\Etablissement h
+        join  App\Entity\Typologie t
+        join App\Entity\Prix p
+        WHERE h.id = :id AND 
+        t.etablissement = h.id AND
+        p.typologie = t.id
+        
+
+        ")->setParameter('id', $id);
+    
+
+
+        $hotels = $hotelsQuery->getResult();
+        return $hotels;
+
+    }
 }

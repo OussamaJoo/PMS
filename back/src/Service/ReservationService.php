@@ -40,6 +40,7 @@ class ReservationService
                 'etablissement' => $res->getEtablissement(),
                  'typologie' => $res->getTypologie(),
                  'mealPlan' => $res->getMealPlan(),
+                 'qte' => $res->getQte()
 
             ];
         }
@@ -66,7 +67,9 @@ class ReservationService
             'etablissement' => $res->getEtablissement(),
             'typologie' => $res->getTypologie(),
             'mealPlan' => $res->getMealPlan(),
-            'Occupants' => $res->getIdOccupant()
+            'Occupants' => $res->getIdOccupant(),
+            'qte' => $res->getQte()
+
 
 ];
 
@@ -100,6 +103,10 @@ class ReservationService
 
     }
 
+    
+
+
+    
 
 
 }

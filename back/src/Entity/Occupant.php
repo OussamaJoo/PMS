@@ -37,7 +37,7 @@ class Occupant
     #[ORM\Column(type: Types::DATETIME_MUTABLE)]
     private ?\DateTimeInterface $updated_at = null;
 
-    #[ORM\ManyToOne(inversedBy: 'idOccupant')]
+    #[ORM\ManyToOne(inversedBy: 'idOccupant',cascade:['persist'])]
     private ?Reservation $reservation = null;
 
     #[ORM\Column(length: 255)]

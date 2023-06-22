@@ -1,7 +1,7 @@
 import InstanceAxios from "../../InstanceAxios"
 import {
     DELETE_USER, DELETE_USER_ERROR, GET_ALL_USER, GET_ALL_USER_ERROR, GET_USER_BYID, GET_USER_BYID_ERROR,
-    POST_USER, POST_USER_ERROR, REMOVE_USER_SELECTED, UPDATE_USER, UPDATE_USER_ERROR, UPLOAD_IMAGE_USER
+    POST_USER, POST_USER_ERROR, REMOVE_USER_SELECTED, UPDATE_USER, UPDATE_USER_ERROR, UPLOAD_IMAGE_USER,POST_MAIL,POST_MAIL_ERROR
 } from "../type/user";
 import {ISLOADING,LOADING} from "../type/loading"
 import {USER_ROLE_PERMISSION_URL} from "../url"
@@ -43,6 +43,7 @@ const saveUser=(user,navigate)=>async dispatch=>{
             dispatch({
                 type:POST_USER_ERROR
             })
+            toast.error(`Email existe déja`,{position:toast.POSITION.BOTTOM_LEFT})
         })
 }
 
@@ -63,6 +64,24 @@ const saveUser2=(user)=>async dispatch=>{
         })
 }
 
+const sendMail=(mail,navigate)=>async dispatch=>{
+    await InstanceAxios.post('http://localhost:8000/api/email/sender',mail ).then(
+        response=>{
+            dispatch({
+                type:POST_MAIL,
+                payload:response.data
+            })
+            
+           
+           
+        }).catch(error=>{
+            dispatch({
+                type:POST_MAIL_ERROR
+            })
+           
+        })
+}
+
 const updateUser=(user,idUser,navigate)=>async dispatch=>{
     await InstanceAxios.put(USER_ROLE_PERMISSION_URL+"/"+idUser,user ).then(
         response=>{
@@ -73,6 +92,23 @@ const updateUser=(user,idUser,navigate)=>async dispatch=>{
            
             navigate('/administration/'+idUser) 
             toast.success(`L'utilisateur  a été Modifié`,{position:toast.POSITION.BOTTOM_LEFT})
+        }).catch(error=>{
+            dispatch({
+                type:UPDATE_USER_ERROR
+            })
+        })
+}
+
+const updateUser2=(user,idUser,navigate)=>async dispatch=>{
+    await InstanceAxios.put(USER_ROLE_PERMISSION_URL+"/"+idUser,user ).then(
+        response=>{
+            dispatch({
+                type:UPDATE_USER,
+                payload:response.data
+            })
+           
+            navigate('/') 
+            toast.success(`Le mot de passe a été Modifié`,{position:toast.POSITION.BOTTOM_LEFT})
         }).catch(error=>{
             dispatch({
                 type:UPDATE_USER_ERROR
@@ -115,4 +151,4 @@ const uploadImageUser = (imageData) => async dispatch => {
     }
 }
 
-export {getUsers,saveUser,saveUser2,getUserById,removeSelectedUser,updateUser,uploadImageUser} 
+export {getUsers,saveUser,saveUser2,getUserById,removeSelectedUser,updateUser,uploadImageUser,sendMail,updateUser2} 

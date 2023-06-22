@@ -4,6 +4,7 @@ import { Link, useNavigate } from 'react-router-dom'
 import { saveEtablissement } from '../../../redux/actions/etablissementAction'
 import Autocomplete, { createFilterOptions } from '@mui/material/Autocomplete';
 import TextField from '@mui/material/TextField';
+import { toast } from "react-toastify"
 
 
 
@@ -14,8 +15,10 @@ const FormAddEtab = () => {
   const [etab, setetab] = useState({
     nom: '',
     description: '',
-    nomType:'',
-    typeEtablissement: ''
+    nomType: '',
+    typeEtablissement: '',
+    adresse: ''
+
 
 
 
@@ -29,8 +32,12 @@ const FormAddEtab = () => {
 
   const savecarre = e => {
     e.preventDefault()
-   
-    dispatch(saveEtablissement(etab, navigate))
+
+    if (etab.nom == '' || etab.description == '' || etab.adresse == '' || etab.nomType == '') {
+      toast.error("il faut remplir tous les champs", { position: toast.POSITION.BOTTOM_LEFT })
+    } else {
+      dispatch(saveEtablissement(etab, navigate))
+    }
 
   }
 
@@ -43,10 +50,10 @@ const FormAddEtab = () => {
     )
   }
 
- 
 
 
- 
+
+
   return (
     <div className="content-wrapper">
       <section className="content-header">
@@ -85,59 +92,64 @@ const FormAddEtab = () => {
                   <input type="text" className="form-control form-control-border" placeholder="Ecrire Ici"
                     name='description' value={etab.description} onChange={onChangeValue} />
                 </div>
-                <div className='row'>
-                <div className='col-2'>
-                <label htmlFor="exampleInputBorder">Type </label>
-                        </div>
-                        <div className='col-2'>
-
-
-                  <Autocomplete
-                    PaperProps={{
-                      style: {
-
-                        width: '50px'
-                      },
-                    }}
-                    value={etab.nomType}
-                    onChange={(evt, newValue) => {
-
-
-                      setetab({ ...etab, nomType: newValue?.nom , typeEtablissement : '/api/type_etablissements/'+newValue?.id })
-                     
-                      
-
-                    }}
-                    filterOptions={(options, params) => {
-                      const filtered = filter(options, params);
-
-
-
-
-                      return filtered;
-                    }}
-                    id="free-solo-dialog-demo"
-                    options={listTypes}
-                    getOptionLabel={(option) => {
-                      // e.g value selected with enter, right from the input
-                      if (typeof option === 'string') {
-                        return option;
-                      }
-                      if (option.inputValue) {
-                        return option.inputValue;
-                      }
-                      return option.nom;
-                    }}
-                    selectOnFocus
-                    clearOnBlur
-                    handleHomeEndKeys
-                    renderOption={(props, option) => <li {...props}>{option.nom}</li>}
-                    sx={{ width: 200 }}
-                    freeSolo
-                    renderInput={(params) => <TextField placeholder="Enter Type" variant="standard" size="small" {...params} />}
-                  />
+                <div className="form-group">
+                  <label htmlFor="exampleInputBorder">Adresse </label>
+                  <input type="text" className="form-control form-control-border" placeholder="Ecrire Ici"
+                    name='adresse' value={etab.adresse} onChange={onChangeValue} />
                 </div>
-              </div>
+                <div className='row'>
+                  <div className='col-2'>
+                    <label htmlFor="exampleInputBorder">Type </label>
+                  </div>
+                  <div className='col-2'>
+
+
+                    <Autocomplete
+                      PaperProps={{
+                        style: {
+
+                          width: '50px'
+                        },
+                      }}
+                      value={etab.nomType}
+                      onChange={(evt, newValue) => {
+
+
+                        setetab({ ...etab, nomType: newValue?.nom, typeEtablissement: '/api/type_etablissements/' + newValue?.id })
+
+
+
+                      }}
+                      filterOptions={(options, params) => {
+                        const filtered = filter(options, params);
+
+
+
+
+                        return filtered;
+                      }}
+                      id="free-solo-dialog-demo"
+                      options={listTypes}
+                      getOptionLabel={(option) => {
+                        // e.g value selected with enter, right from the input
+                        if (typeof option === 'string') {
+                          return option;
+                        }
+                        if (option.inputValue) {
+                          return option.inputValue;
+                        }
+                        return option.nom;
+                      }}
+                      selectOnFocus
+                      clearOnBlur
+                      handleHomeEndKeys
+                      renderOption={(props, option) => <li {...props}>{option.nom}</li>}
+                      sx={{ width: 200 }}
+                      freeSolo
+                      renderInput={(params) => <TextField placeholder="Enter Type" variant="standard" size="small" {...params} />}
+                    />
+                  </div>
+                </div>
               </div>
 
             </div>

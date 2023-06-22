@@ -6,6 +6,7 @@ use App\Entity\Disponibilite;
 use App\Entity\Typologie;
 use App\Repository\DisponibiliteRepository;
 use App\Repository\TypologieRepository;
+use DateTime;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Messenger\MessageBusInterface;
 
@@ -140,6 +141,51 @@ class DispoService
 
         return $data;
     }
+
+    public function moinsQte(int $idTypo , int $qte, DateTime $datedebut, DateTime $datefin){
+        $this->dispoRepo->moinsQte($idTypo,$qte,$datedebut,$datefin);
+    }
+
+    public function plusQte(int $idTypo , int $qte, DateTime $datedebut, DateTime $datefin){
+        $this->dispoRepo->plusQte($idTypo,$qte,$datedebut,$datefin);
+    }
+
+    public function getAllDisposByIdEtab(int $id)
+    {
+
+        $dispos[] = new Disponibilite();
+        $dispos = $this->dispoRepo -> findByIdEatb($id);
+        $data = [];
+      
+
+        foreach ($dispos as $dispo) {
+            $typo = new Typologie();
+            $typo = $dispo->getTypologie();
+            $data1 =  [
+                'id' => $typo->getId(),
+                'nom' => $typo->getNom(),
+                'capacité' => $typo->getCapacite(),
+                'etablissement' => $typo->getEtablissement(),
+                'acceptBebe' => $typo->isAccecptBebe(),
+                'acceptEnfant' => $typo->isAcceptEnfant(),
+                'acceptHandicapé' => $typo->isAcceptHandicapé(),
+                'annulable' => $typo->isAnnulable(),
+                'remboursable' => $typo->isRemborsable(),
+            ];
+
+            $data[] = [
+                'id' => $dispo->getId(),
+                'date' => $dispo->getDate(),
+                'qte' => $dispo->getQte(),
+                'typologie' => $data1,
+
+
+            ];
+        }
+        return $data;
+    }
+
+
 
    
 

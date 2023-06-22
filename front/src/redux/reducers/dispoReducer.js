@@ -3,12 +3,13 @@ import {
     DISPO_ERROR, GET_DISPO, GET_DISPO_BY_ID,
     GET_DISPO_BY_ID_ERROR, SAVE_DISPO, SAVE_DISPO_ERROR,
     CONFIRMATION_DISPO_BY_ID, CONFIRMATION_DISPO_BY_ID_ERROR, REMOVE_SELECTED_DISPO,
-    CREATE_FACTURE, CREATE_FACTURE_ERROR, UPDATE_DISPO, UPDATE_DISPO_ERROR, UPLOAD_PDF_FACTURE
+    CREATE_FACTURE, CREATE_FACTURE_ERROR, UPDATE_DISPO, UPDATE_DISPO_ERROR, UPLOAD_PDF_FACTURE, GET_DISPO_BY_ID_ETAB, DISPO_BY_ID_ETAB_ERROR
 } from "../type/dispo";
 import { ISLOADING, LOADING } from "../type/loading"
 
 const initialeState = {
     listDispo: [],
+    listDispoIdEtab: [],
     dispo: {},
     loading: true
 }
@@ -22,6 +23,18 @@ const dispoReducer = (state = initialeState, action) => {
 
             }
         case DISPO_ERROR:
+            return {
+                ...state,
+                error: action.payload,
+
+            }
+        case GET_DISPO_BY_ID_ETAB:
+            return {
+                ...state,
+                listDispoIdEtab: action.payload,
+
+            }
+        case DISPO_BY_ID_ETAB_ERROR:
             return {
                 ...state,
                 error: action.payload,
@@ -91,13 +104,14 @@ const dispoReducer = (state = initialeState, action) => {
         case LOGOUT:
             return {
                 listDispo: [],
+                listDispoIdEtab: [],
                 dispo: {},
                 loading: true
             }
-            case UPLOAD_PDF_FACTURE:
+        case UPLOAD_PDF_FACTURE:
             return {
                 ...state
-                
+
             };
         default:
             return state;

@@ -29,6 +29,7 @@ class EtablissementService
                 'id' => $etab->getId(),
                 'nom' => $etab->getNom(),
                 'description' => $etab->getDescription(),
+                'adresse'=> $etab->getAdresse(),
                 'typeEtablissement' => $etab->getTypeEtablissement(),
 
             ];
@@ -51,6 +52,7 @@ class EtablissementService
                     'id' => $etab->getId(),
                     'nom' => $etab->getNom(),
                     'description' => $etab->getDescription(),
+                    'adresse'=> $etab->getAdresse(),
                     'typeEtablissement' => $etab->getTypeEtablissement(),
                     
         ];

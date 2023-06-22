@@ -6,7 +6,7 @@ import {toast} from "react-toastify"
 
 
 const getSearch=(order)=>async dispatch=>{
-    await InstanceAxios.post('http://localhost:8000/api/dispoResa',order, { withCredentials: false }).then(
+    await InstanceAxios.post('http://localhost:8000/api/getCombDispo',order, { withCredentials: false }).then(
         response=>{
             dispatch({
                 type:GET_SEARCH,

@@ -56,6 +56,16 @@ class UserRepository extends ServiceEntityRepository implements PasswordUpgrader
         $this->save($user, true);
     }
 
+    public function getMaxId()
+    {
+        $highest_id = $this->getEntityManager()->createQueryBuilder()
+        ->select('MAX(u.id)')
+        ->from('App\Entity\User', 'u')
+        ->getQuery()
+        ->getSingleScalarResult();
+        return $highest_id;
+    }
+
 //    /**
 //     * @return User[] Returns an array of User objects
 //     */

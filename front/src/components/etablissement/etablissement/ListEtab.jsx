@@ -27,6 +27,10 @@ const ListEtab = () => {
       accessor: "description"
     },
     {
+      Header: "Adresse",
+      accessor: "adresse"
+    },
+    {
       Header: "Type Etablissement",
       accessor: "typeEtablissement.nom"
     }

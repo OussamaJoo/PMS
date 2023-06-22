@@ -79,6 +79,14 @@ const SideBar = () => {
                                             <p> MealPlan </p>
                                         </Link>
                                     </li>
+
+
+                                    <li className="nav-item">
+                                        <Link className='nav-link' to={'/etablissement/clients'}>
+                                            <i class="far fa-circle nav-icon"></i>
+                                            <p> Client </p>
+                                        </Link>
+                                    </li>
                                     
 
                                 </ul>

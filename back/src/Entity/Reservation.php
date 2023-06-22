@@ -30,7 +30,7 @@ class Reservation
     #[ORM\Column(type: Types::DATETIME_MUTABLE)]
     private ?\DateTimeInterface $updated_at = null;
 
-    #[ORM\OneToMany(mappedBy: 'reservation', targetEntity: Occupant::class)]
+    #[ORM\OneToMany(mappedBy: 'reservation', targetEntity: Occupant::class,cascade:['persist'])]
     private Collection $idOccupant;
 
     #[ORM\ManyToOne(inversedBy: 'idReservation')]
@@ -42,8 +42,15 @@ class Reservation
     #[ORM\ManyToOne(inversedBy: 'idReservation')]
     private ?MealPlan $mealPlan = null;
 
-    #[ORM\Column(length: 255)]
-    private ?string $etat = null;
+ 
+
+    #[ORM\ManyToOne(inversedBy: 'lignesReservations' ,cascade:['persist'])]
+    private ?Commande $commande = null;
+
+    #[ORM\Column]
+    private ?int $qte = null;
+
+    
 
     public function __construct()
     {
@@ -177,15 +184,35 @@ class Reservation
         return $this;
     }
 
-    public function getEtat(): ?string
+   
+
+    public function getCommande(): ?Commande
     {
-        return $this->etat;
+        return $this->commande;
     }
 
-    public function setEtat(string $etat): self
+    public function setCommande(?Commande $commande): self
     {
-        $this->etat = $etat;
+        $this->commande = $commande;
 
         return $this;
     }
+
+    public function __toString(){
+        return ('Reservation');
+    }
+
+    public function getQte(): ?int
+    {
+        return $this->qte;
+    }
+
+    public function setQte(int $qte): self
+    {
+        $this->qte = $qte;
+
+        return $this;
+    }
+
+    
 }

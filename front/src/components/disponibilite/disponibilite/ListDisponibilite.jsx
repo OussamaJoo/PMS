@@ -37,6 +37,10 @@ const ListDisponibilite = () => {
       Header: "Etablissement",
       accessor: "typologie.etablissement.nom",
     },
+    {
+      Header: "Adresse",
+      accessor: "typologie.etablissement.adresse",
+    },
   
    
 

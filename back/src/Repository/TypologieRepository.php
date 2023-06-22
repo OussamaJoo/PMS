@@ -39,6 +39,14 @@ class TypologieRepository extends ServiceEntityRepository
         }
     }
 
+    public function findByIdEatb(int $id): array {
+        return $this->createQueryBuilder('t')
+            ->andWhere('t.etablissement = :param')
+                ->setParameter('param', $id)
+                ->getQuery()
+                ->getResult();
+    }
+
 //    /**
 //     * @return Typologie[] Returns an array of Typologie objects
 //     */

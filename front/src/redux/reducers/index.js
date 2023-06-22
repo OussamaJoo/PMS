@@ -9,6 +9,8 @@ import mealPlanReducer from "./mealPlanReducer"
 import reservationReducer from "./reservationReducer";
 import occupantReducer from "./occupantReducer";
 import searchReducer from "./searchReducer";
+import clientReducer from "./clientReducer";
+import commandeReducer from "./commandeReducer";
 
 import authReducer from "./authReducer";
 import userReducer from "./userReducer"
@@ -29,6 +31,8 @@ export default combineReducers({
     reservationReducer:reservationReducer,
     occupantReducer:occupantReducer,
     searchReducer:searchReducer,
+    clientReducer:clientReducer,
+    commandeReducer:commandeReducer,
     
     
 })

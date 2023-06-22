@@ -29,7 +29,7 @@ class TypologieService
                 'nom' => $typo->getNom(),
                 'capacite' => $typo->getCapacite(),
                 'etablissement' => $typo->getEtablissement(),
-                'acceptBebe' => $typo->isAccecptBebe(),
+                'accecptBebe' => $typo->isAccecptBebe(),
                 'acceptEnfant' => $typo->isAcceptEnfant(),
                 'acceptHandicapé' => $typo->isAcceptHandicapé(),
                 'annulable' => $typo->isAnnulable(),
@@ -57,13 +57,38 @@ class TypologieService
             'nom' => $typo->getNom(),
             'capacite' => $typo->getCapacite(),
             'etablissement' => $typo->getEtablissement(),
-            'acceptBebe' => $typo->isAccecptBebe(),
+            'accecptBebe' => $typo->isAccecptBebe(),
             'acceptEnfant' => $typo->isAcceptEnfant(),
             'acceptHandicapé' => $typo->isAcceptHandicapé(),
             'annulable' => $typo->isAnnulable(),
             'remboursable' => $typo->isRemborsable(),
         ];
 
+        return $data;
+    }
+
+    public function getAllTypologiesByIdEtab(int $id)
+    {
+
+        $typos[] = new Typologie();
+        $typos = $this->typoRepo ->findByIdEatb($id);
+        $data = [];
+
+        foreach ($typos as $typo) {
+            $data[] = [
+                'id' => $typo->getId(),
+                'nom' => $typo->getNom(),
+                'capacite' => $typo->getCapacite(),
+                'etablissement' => $typo->getEtablissement(),
+                'accecptBebe' => $typo->isAccecptBebe(),
+                'acceptEnfant' => $typo->isAcceptEnfant(),
+                'acceptHandicapé' => $typo->isAcceptHandicapé(),
+                'annulable' => $typo->isAnnulable(),
+                'remboursable' => $typo->isRemborsable(),
+
+
+            ];
+        }
         return $data;
     }
 

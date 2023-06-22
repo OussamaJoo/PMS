@@ -1,10 +1,11 @@
 import React, { useState } from 'react'
-import { useDispatch , useSelector} from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { Link, useNavigate } from 'react-router-dom'
 import { saveTypologie } from '../../../redux/actions/typologieAction'
 import ToggleButton from 'react-toggle-button'
 import Autocomplete, { createFilterOptions } from '@mui/material/Autocomplete';
 import TextField from '@mui/material/TextField';
+import { toast } from "react-toastify"
 
 
 
@@ -16,6 +17,7 @@ const FormAddTypologie = () => {
     nom: '',
     categorie: '',
     capacite: '',
+    nomEtablissement: '',
     acceptEnfant: false,
     accecptBebe: false,
     acceptHandicapé: false,
@@ -33,7 +35,12 @@ const FormAddTypologie = () => {
 
   const savecarre = e => {
     e.preventDefault()
-    dispatch(saveTypologie(typologie, navigate))
+    if (typologie.nom == '' && typologie.nomEtablissement == '' && typologie.capacite == '') {
+      toast.error("il faut remplir tous les champs", { position: toast.POSITION.BOTTOM_LEFT })
+    } else {
+      dispatch(saveTypologie(typologie, navigate))
+    }
+
 
   }
 
@@ -48,12 +55,12 @@ const FormAddTypologie = () => {
 
   const onChangeValue1 = (e) => {
     settypologie(
-        {
-            ...typologie,
-            [e.target.name]: parseInt(e.target.value),
-        }
+      {
+        ...typologie,
+        [e.target.name]: parseInt(e.target.value),
+      }
     )
-}
+  }
 
   return (
     <div className="content-wrapper">
@@ -82,7 +89,7 @@ const FormAddTypologie = () => {
           <form encType="multipart/form-data">
 
             <div className='row'>
-            <div className='col-md-6 col-sm-6 col-6'>
+              <div className='col-md-6 col-sm-6 col-6'>
                 <div className="form-group">
                   <label htmlFor="exampleInputBorder">Nom </label>
 
@@ -95,65 +102,58 @@ const FormAddTypologie = () => {
                 <div className="form-group">
                   <label htmlFor="exampleInputBorder">Etablissement </label>
                   <Autocomplete
-              
-              PaperProps={{
-                style: {
 
-                  width: '50px'
-                },
-              }}
-              value={typologie.nomEtablissement }
-              onChange={(evt, newValue) => {
+                    PaperProps={{
+                      style: {
 
-                
-                settypologie({ ...typologie, nomEtablissement: newValue?.nom , etablissement:  '/api/etablissements/'+newValue?.id })
+                        width: '50px'
+                      },
+                    }}
+                    value={typologie.nomEtablissement}
+                    onChange={(evt, newValue) => {
 
 
-
-              }}
-              filterOptions={(options, params) => {
-                const filtered = filter(options, params);
+                      settypologie({ ...typologie, nomEtablissement: newValue?.nom, etablissement: '/api/etablissements/' + newValue?.id })
 
 
 
+                    }}
+                    filterOptions={(options, params) => {
+                      const filtered = filter(options, params);
 
-                return filtered;
-              }}
-              id="free-solo-dialog-demo"
-              options={listEtablissement}
-              getOptionLabel={(option) => {
-                // e.g value selected with enter, right from the input
-                if (typeof option === 'string') {
-                  return option || '';
-                }
-                if (option.inputValue) {
-                  return option.inputValue || '';
-                }
-                return option.nom 
-              }}
-              selectOnFocus
-              clearOnBlur
-              handleHomeEndKeys 
-              renderOption={(props, option) => <li {...props}>{option.nom}</li>}
-              sx={{ width: 300 }}
-              freeSolo
-              renderInput={(params) => <TextField placeholder="Enter Type" variant="standard" size="small" {...params} />}
-            />
-                 
+
+
+
+                      return filtered;
+                    }}
+                    id="free-solo-dialog-demo"
+                    options={listEtablissement}
+                    getOptionLabel={(option) => {
+                      // e.g value selected with enter, right from the input
+                      if (typeof option === 'string') {
+                        return option || '';
+                      }
+                      if (option.inputValue) {
+                        return option.inputValue || '';
+                      }
+                      return option.nom
+                    }}
+                    selectOnFocus
+                    clearOnBlur
+                    handleHomeEndKeys
+                    renderOption={(props, option) => <li {...props}>{option.nom}</li>}
+                    sx={{ width: 300 }}
+                    freeSolo
+                    renderInput={(params) => <TextField placeholder="Enter Type" variant="standard" size="small" {...params} />}
+                  />
+
                 </div>
               </div>
+
+
 
 
               <div className='col-md-6 col-sm-6 col-6'>
-                <div className="form-group">
-                  <label htmlFor="exampleInputBorder">Categorie </label>
-
-                  <input type="text" className="form-control form-control-border" placeholder="Ecrire Ici"
-                    name='categorie' value={typologie.categorie} onChange={onChangeValue} />
-                </div>
-              </div>
-
-              <div className='col-md-4 col-sm-4 col-4'>
                 <div className="form-group">
                   <label htmlFor="exampleInputBorder">Capacité </label>
 
@@ -264,7 +264,7 @@ const FormAddTypologie = () => {
                   }} />
 
               </div>
-{JSON.stringify(typologie)}
+              {JSON.stringify(typologie)}
             </div>
           </form>
         </div>

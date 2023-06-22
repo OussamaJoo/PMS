@@ -1,6 +1,6 @@
 import {
     DELETE_USER, DELETE_USER_ERROR, GET_ALL_USER, GET_ALL_USER_ERROR, GET_USER_BYID, GET_USER_BYID_ERROR,
-    POST_USER, POST_USER_ERROR, REMOVE_USER_SELECTED, UPDATE_USER, UPDATE_USER_ERROR, UPLOAD_IMAGE_USER
+    POST_USER, POST_USER_ERROR, REMOVE_USER_SELECTED, UPDATE_USER, UPDATE_USER_ERROR, UPLOAD_IMAGE_USER,POST_MAIL,POST_MAIL_ERROR
 } from "../type/user";
 import { ISLOADING, LOADING } from "../type/loading"
 import { LOGOUT } from "../type/auth";
@@ -33,6 +33,16 @@ const userReducer = (state = initialeState, action) => {
                 listUsers: [action.payload, ...state.listUsers]
             }
         case POST_USER_ERROR:
+            return {
+                ...state,
+                error: action.payload
+            }
+        case POST_MAIL:
+            return {
+                ...state,
+              
+            }
+        case POST_MAIL_ERROR:
             return {
                 ...state,
                 error: action.payload

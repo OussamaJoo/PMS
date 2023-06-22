@@ -41,12 +41,14 @@ class MealPlanRepository extends ServiceEntityRepository
 
 
     public function findByIdEatb(int $id): array {
-        return $this->createQueryBuilder('r')
-            ->andWhere('r.etablissement = :param')
+        return $this->createQueryBuilder('m')
+            ->andWhere('m.etablissement = :param')
                 ->setParameter('param', $id)
                 ->getQuery()
                 ->getResult();
     }
+
+    
 
 //    /**
 //     * @return MealPlan[] Returns an array of MealPlan objects

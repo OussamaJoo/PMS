@@ -89,7 +89,7 @@ const DetailType = () => {
 
 
                   <h5>Liste des {typeUpdate.nom}s</h5>
-                  {JSON.stringify(listEtablissement)}
+                
                   <div className="tab-pane fade show active" id="custom-content-below-test" role="tabpanel" aria-labelledby="custom-content-below-test-tab">
                     <table className='table align-middle  mb-0 bg-white   table-sm'>
                       <thead className='small'>

@@ -39,6 +39,7 @@ const saveEtablissement=(order,navigate)=>async dispatch=>{
             dispatch({
                 type:SAVE_ETABLISSEMENT_ERROR
             })
+            toast.error("Etablissement déja existe",{position:toast.POSITION.BOTTOM_LEFT})
         })
 }
 const updateEtablissement=(order,idOrder,navigate)=>async dispatch=>{
